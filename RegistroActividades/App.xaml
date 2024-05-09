@@ -1,9 +1,42 @@
 ﻿<Application x:Class="RegistroActividades.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:RegistroActividades"
-             StartupUri="MainWindow.xaml">
+             StartupUri="/Views/MainView.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary xmlns:system="clr-namespace:System;assembly=mscorlib">
+            
+            <Color x:Key="grisClaroColor">#eaecee</Color>
+            <SolidColorBrush x:Key="grisClaro"
+                             Color="{StaticResource grisClaroColor}"/>
+            <Color x:Key="colorgris">#4B4F59</Color>
+            <SolidColorBrush x:Key="gris"
+                             Color="{StaticResource colorgris}" />
+            <Color x:Key="colorPrimario">#424949</Color>
+            <SolidColorBrush x:Key="Primario"
+                             Color="{StaticResource colorPrimario}" />
+            <Color x:Key="colorNegro">#242424</Color>
+            <SolidColorBrush x:Key="Negro"
+                             Color="{StaticResource colorNegro}" />
+            <Color x:Key="colorLigero">#99C0EA</Color>
+            <SolidColorBrush x:Key="Ligero"
+                             Color="{StaticResource colorLigero}" />
+            <Color x:Key="colorFuerte">#4E74A7</Color>
+            <SolidColorBrush x:Key="Fuerte"
+                             Color="{StaticResource colorFuerte}" />
+            <Style TargetType="TextBlock"
+                   x:Key="FontFamily">
+                <Setter Property="FontFamily"
+                        Value="/Assets/Fonts/#Montserrat"></Setter>
+            </Style>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light"
+                                             PrimaryColor="Grey"
+                                             SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

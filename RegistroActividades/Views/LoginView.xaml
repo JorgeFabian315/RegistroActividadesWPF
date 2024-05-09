@@ -1,0 +1,205 @@
+﻿<UserControl x:Class="RegistroActividades.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:RegistroActividades.Views"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d"
+             d:DesignHeight="700"
+             Background="#fff"
+             d:DesignWidth="1300">
+    <Grid Margin="0"
+          Background="{StaticResource Primario}">
+        <Border Background="#fff"
+                Padding="10"
+                CornerRadius="20"
+                BorderBrush="{StaticResource grisClaro}"
+                BorderThickness="1"
+                Width="500"
+                Height="600">
+            <StackPanel Grid.Column="1"
+                        Margin="20"
+                        HorizontalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock"
+                           x:Key="Titulo-Loging"
+                           BasedOn="{StaticResource FontFamily}">
+                        <Setter Property="FontSize"
+                                Value="30" />
+                        <Setter Property="TextAlignment"
+                                Value="Center" />
+                        <Setter Property="FontWeight"
+                                Value="ExtraBold" />
+                    </Style>
+                    <Style TargetType="Border"
+                           x:Key="botonesGoogleFacebook">
+                        <Setter Property="Height"
+                                Value="40" />
+                        <Setter Property="VerticalAlignment"
+                                Value="Center" />
+                        <Setter Property="HorizontalAlignment"
+                                Value="Center" />
+                        <Setter Property="BorderThickness"
+                                Value="1" />
+                        <Setter Property="BorderBrush"
+                                Value="{StaticResource gris}" />
+                        <Setter Property="Width"
+                                Value="320" />
+                        <Setter Property="Margin"
+                                Value="0,5" />
+                        <Setter Property="CornerRadius"
+                                Value="3" />
+                        <Setter Property="Padding"
+                                Value="10" />
+                    </Style>
+                    <Style TargetType="TextBlock"
+                           BasedOn="{StaticResource FontFamily}"
+                           x:Key="botonesGoogleFacebook-texto">
+                        <Setter Property="Margin"
+                                Value="10,0,0,0" />
+                        <Setter Property="VerticalAlignment"
+                                Value="Center" />
+                        <Setter Property="FontSize"
+                                Value="13" />
+                        <Setter Property="TextAlignment"
+                                Value="Center" />
+                    </Style>
+                    <Style TargetType="Button"
+                           BasedOn="{StaticResource MaterialDesignFlatDarkBgButton }"
+                           x:Key="BotonesBackground">
+                        <Setter Property="Width"
+                                Value="320" />
+                        <Setter Property="BorderThickness"
+                                Value="0" />
+                        <Setter Property="Height"
+                                Value="40" />
+                        <Setter Property="Margin"
+                                Value="0,10" />
+                        <Setter Property="FontWeight"
+                                Value="Light" />
+                        <Setter Property="Background"
+                                Value="{StaticResource Primario}" />
+                    </Style>
+                </StackPanel.Resources>
+                <WrapPanel Background="#fff"
+                           Margin="0,0,0,20"
+                           HorizontalAlignment="Center">
+                    <WrapPanel.Resources>
+                        <Style TargetType="Image">
+                            <Setter Property="Width"
+                                    Value="100" />
+                            <Setter Property="Height"
+                                    Value="200" />
+                        </Style>
+                    </WrapPanel.Resources>
+                    <Image Source="/Assets/Imagenes/tec_logo.jpg"
+                           Height="70"
+                           Margin="0,0,20,0"
+                           Width="150"
+                           Stretch="Fill" />
+                    <Image Height="70"
+                           Width="70"
+                           Stretch="Fill"
+                           Source="/Assets/Imagenes/tec_logo2.jpg" />
+                </WrapPanel>
+                <StackPanel Margin="0,0,0,20">
+                    <TextBlock Text="Registro de Actividades"
+                               Style="{StaticResource Titulo-Loging}" />
+                    <TextBlock Text="Bienvenido de regreso"
+                               Style="{StaticResource Titulo-Loging}"
+                               FontSize="20"
+                               Margin="0,5,0,0"
+                               Foreground="{StaticResource gris}" />
+                </StackPanel>
+                <Border Background="{StaticResource grisClaro}"
+                        Height="40"
+                        Width="320"
+                        Margin="0,10,0,0"
+                        BorderBrush="{StaticResource Negro}"
+                        BorderThickness="0.5"
+                        CornerRadius="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:PackIcon Kind="Account"
+                                                 HorizontalAlignment="Center"
+                                                 Foreground="{StaticResource Primario}"
+                                                 Width="25"
+                                                 Height="25"
+                                                 VerticalAlignment="Center" />
+                        <TextBox BorderThickness="0"
+                                 FontSize="15"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 VerticalAlignment="Bottom"
+                                 Padding="10"
+                                 HorizontalAlignment="Left"
+                                 VerticalContentAlignment="Center"
+                                 Width="250"
+                                 materialDesign:HintAssist.Hint="Ingresa tu usuario"
+                                 Grid.Column="1" />
+                    </Grid>
+                </Border>
+                <Border Background="{StaticResource grisClaro}"
+                        Height="40"
+                        Margin="0,15,0,15"
+                        Width="320"
+                        BorderBrush="{StaticResource Negro}"
+                        BorderThickness="0.5"
+                        CornerRadius="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="45" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:PackIcon Kind="Lock"
+                                                 HorizontalAlignment="Center"
+                                                 Foreground="{StaticResource Primario}"
+                                                 Width="25"
+                                                 Height="25"
+                                                 VerticalAlignment="Center" />
+                        <PasswordBox BorderThickness="0"
+                                     FontSize="15"
+                                     VerticalAlignment="Bottom"
+                                     VerticalContentAlignment="Center"
+                                     Padding="10"
+                                     materialDesign:TextFieldAssist.HasClearButton="True"
+                                     HorizontalAlignment="Left"
+                                     Width="250"
+                                     materialDesign:HintAssist.Hint="Ingresa tu contraseña"
+                                     Grid.Column="1" />
+                    </Grid>
+                </Border>
+                <Button Style="{StaticResource BotonesBackground}">
+                    <WrapPanel VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontFamily}"
+                                   Text="Iniciar sesión"
+                                   VerticalAlignment="Center" />
+                        <materialDesign:PackIcon Kind="ArrowRight"
+                                                 VerticalAlignment="Center"
+                                                 Width="20"
+                                                 Margin="10,0,0,0"
+                                                 Height="20" />
+                    </WrapPanel>
+                </Button>
+                <Border Style="{StaticResource botonesGoogleFacebook}">
+                    <WrapPanel>
+                        <Image Source="/Assets/Imagenes/google.png" />
+                        <TextBlock Text="Iniciar sesión con Google"
+                                   Style="{StaticResource botonesGoogleFacebook-texto}" />
+                    </WrapPanel>
+                </Border>
+                <Border Style="{StaticResource botonesGoogleFacebook}">
+                    <WrapPanel>
+                        <Image Source="/Assets/Imagenes/facebook.png" />
+                        <TextBlock Text="Iniciar sesión con Facebook"
+                                   Style="{StaticResource botonesGoogleFacebook-texto}" />
+                    </WrapPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
