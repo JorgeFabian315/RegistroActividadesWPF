@@ -19,12 +19,15 @@
             <Color x:Key="colorNegro">#242424</Color>
             <SolidColorBrush x:Key="Negro"
                              Color="{StaticResource colorNegro}" />
-            <Color x:Key="colorLigero">#99C0EA</Color>
+            <Color x:Key="colorLigero">#A6A9A9</Color>
             <SolidColorBrush x:Key="Ligero"
                              Color="{StaticResource colorLigero}" />
-            <Color x:Key="colorFuerte">#4E74A7</Color>
+            <Color x:Key="colorFuerte">#3F3F3F</Color>
             <SolidColorBrush x:Key="Fuerte"
                              Color="{StaticResource colorFuerte}" />
+            <Color x:Key="morado">#4343CE</Color>
+            <SolidColorBrush x:Key="Morado"
+                             Color="{StaticResource morado}" />
             <Style TargetType="TextBlock"
                    x:Key="FontFamily">
                 <Setter Property="FontFamily"

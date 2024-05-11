@@ -185,6 +185,24 @@
                                                  Height="20" />
                     </WrapPanel>
                 </Button>
+                <WrapPanel    HorizontalAlignment="Center"
+                              Width="320">
+                    <TextBlock Style="{StaticResource FontFamily}"
+                               FontSize="15"
+                               Text="¿No tienes una cuenta?"
+                               Margin="0,10,0,10" />
+                    <Button Style="{x:Null}"
+                            Margin="5,0,0,0"
+                            Cursor="Hand"
+                            Background="Transparent"
+                            BorderThickness="0">
+                        <TextBlock Style="{StaticResource FontFamily}"
+                                   Foreground="{StaticResource Morado}"
+                                   FontSize="15"
+                                   VerticalAlignment="Center"
+                                   Text="Crea una." />
+                    </Button>
+                </WrapPanel>
                 <Border Style="{StaticResource botonesGoogleFacebook}">
                     <WrapPanel>
                         <Image Source="/Assets/Imagenes/google.png" />

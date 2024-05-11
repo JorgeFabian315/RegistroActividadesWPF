@@ -9,15 +9,15 @@
         Title="MainView"
         Icon="{x:Null}"
         WindowStartupLocation="CenterScreen"
-        Height="700"
-        MinWidth="900"
+        Height="800"
+        MinWidth="1000"
         Width="1300">
     <Grid>
         <Border Background="#fff"
                 CornerRadius="20" />
         <ContentControl Margin="0">
             <ContentControl.Resources>
-            <local:LoginView x:Key="loginView"/>
+            <local:HomeView x:Key="loginView"/>
                 <Style TargetType="ContentControl">
                     <Setter Property="Content"
                             Value="{StaticResource loginView}" />
