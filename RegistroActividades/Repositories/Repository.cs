@@ -10,39 +10,43 @@ namespace RegistroActividades.Repositories
 {
     public class Repository<T> where T: class
     {
-        //SQLiteConnection context;
-        //public Repository(string ruta)
+        // crea un repositorio generico en sqlite de tipo T con las operaciones basicas usando sqlite-net-pcl 
+        private SQLiteAsyncConnection connection;
+        //public Repository()
         //{
-        //    context = new(ruta);
-        //    context.CreateTable<T>();
+        //    connection = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RegistroActividades.db3"));
+        //    connection.CreateTableAsync<T>().Wait();
         //}
 
-        //public void Insert(T libro)
+        //public async Task<List<T>> GetAll()
         //{
-        //    context.Insert(libro);
+        //    return await connection.Table<T>().ToListAsync();
         //}
 
-        //public void Update(T libro)
+        //public async Task<T> GetById(int id)
         //{
-        //    context.Update(libro);
-        //}
-        //public void InsertOrReplace(T libro)
-        //{
-        //    context.InsertOrReplace(libro);
-        //}
-        //public void Delete(T libro)
-        //{
-        //    context.Delete(libro);
+        //    return await connection.FindAsync<T>(id);
         //}
 
-        //public IEnumerable<T> GetAll()
-        //{
-        //    return context.Table<T>().ToList();
-        //}
-        //public T Get(int id)
-        //{
-        //    return context.Find<T>(id);
-        //}
+        public async Task<int> Insert(T entity)
+        {
+            return await connection.InsertAsync(entity);
+        }
+
+        public async Task<int> Update(T entity)
+        {
+            return await connection.UpdateAsync(entity);
+        }
+        
+        public async Task<int> Delete(T entity)
+        {
+            return await connection.DeleteAsync(entity);
+        }
+
+        public async Task<int> DeleteAll()
+        {
+            return await connection.DeleteAllAsync<T>();
+        }
 
     }
 }

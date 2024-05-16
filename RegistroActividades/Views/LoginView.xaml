@@ -76,7 +76,7 @@
                         <Setter Property="Height"
                                 Value="40" />
                         <Setter Property="Margin"
-                                Value="0,10" />
+                                Value="0,10,0,15" />
                         <Setter Property="FontWeight"
                                 Value="Light" />
                         <Setter Property="Background"
@@ -185,7 +185,7 @@
                                                  Height="20" />
                     </WrapPanel>
                 </Button>
-                <WrapPanel    HorizontalAlignment="Center"
+                <!--<WrapPanel    HorizontalAlignment="Center"
                               Width="320">
                     <TextBlock Style="{StaticResource FontFamily}"
                                FontSize="15"
@@ -202,7 +202,7 @@
                                    VerticalAlignment="Center"
                                    Text="Crea una." />
                     </Button>
-                </WrapPanel>
+                </WrapPanel>-->
                 <Border Style="{StaticResource botonesGoogleFacebook}">
                     <WrapPanel>
                         <Image Source="/Assets/Imagenes/google.png" />

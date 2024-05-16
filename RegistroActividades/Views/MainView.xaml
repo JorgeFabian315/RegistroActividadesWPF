@@ -17,7 +17,7 @@
                 CornerRadius="20" />
         <ContentControl Margin="0">
             <ContentControl.Resources>
-            <local:HomeView x:Key="loginView"/>
+            <local:LoginView x:Key="loginView"/>
                 <Style TargetType="ContentControl">
                     <Setter Property="Content"
                             Value="{StaticResource loginView}" />

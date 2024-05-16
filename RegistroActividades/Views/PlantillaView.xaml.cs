@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace RegistroActividades.Views
 {
     /// <summary>
-    /// Lógica de interacción para HomeView.xaml
+    /// Lógica de interacción para PlantillaView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class PlantillaView : UserControl
     {
-        public HomeView()
+        public PlantillaView()
         {
             InitializeComponent();
-        }
-
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
         }
     }
 }

@@ -10,46 +10,11 @@
              d:DesignWidth="1300">
     <Grid Margin="10"
           Background="#fff">
-        <Grid.Resources>
-            <Style TargetType="TextBlock"
-                   x:Key="TextoUser"
-                   BasedOn="{StaticResource FontFamily}">
-                <Setter Property="FontSize"
-                        Value="30" />
-                <Setter Property="Foreground"
-                        Value="{StaticResource grisClaro}" />
-            </Style>
-            <Style TargetType="TextBlock"
-                   x:Key="TextoFecha"
-                   BasedOn="{StaticResource FontFamily}">
-                <Setter Property="Foreground"
-                        Value="{StaticResource grisClaro}" />
-                <Setter Property="FontSize"
-                        Value="12" />
-            </Style>
-            <Style TargetType="TextBlock"
-                   x:Key="Descripcion"
-                   BasedOn="{StaticResource FontFamily}">
-                <Setter Property="TextWrapping"
-                        Value="Wrap" />
-                <Setter Property="Foreground"
-                        Value="{StaticResource grisClaro}" />
-                <Setter Property="Margin"
-                        Value="15,3,3,3" />
-                <Setter Property="FontSize"
-                        Value="15" />
-                <Setter Property="VerticalAlignment"
-                        Value="Center" />
-                <Setter Property="TextAlignment"
-                        Value="Left" />
-                <Setter Property="TextTrimming"
-                        Value="CharacterEllipsis" />
-            </Style>
-        </Grid.Resources>
+        <Grid.Resources></Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".2*" />
-            <ColumnDefinition Width=".6*" />
-            <ColumnDefinition Width=".2*" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width=".7*" />
+            <ColumnDefinition Width=".3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height=".12*" />
@@ -63,17 +28,47 @@
                 Background="{StaticResource Primario}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".2*" />
-                    <ColumnDefinition Width=".4*" />
+                    <ColumnDefinition Width=".3*" />
+                    <ColumnDefinition Width=".3*" />
                     <ColumnDefinition Width=".4*" />
                 </Grid.ColumnDefinitions>
+                <!--#region LOGO -->
+                <Border Background="#fff"
+                        CornerRadius="5"
+                        Margin="10"
+                        Padding="5">
+                    <WrapPanel VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Background="#FFFFFF">
+                        <WrapPanel.Resources>
+                            <Style TargetType="TextBlock"
+                                   BasedOn="{StaticResource FontFamily}"
+                                   x:Key="textoLogo">
+                                <Setter Property="Margin"
+                                        Value="10,0,0,0" />
+                                <Setter Property="FontSize"
+                                        Value="18" />
+                                <Setter Property="FontWeight"
+                                        Value="DemiBold" />
+                            </Style>
+                        </WrapPanel.Resources>
+                        <!--<Image Source="/Assets/Imagenes/logoSVG.svg"
+                               Height="50" 
+                               Width="50"/>-->
+                        <TextBlock Text="TECNM - Región Carbonífera"
+                                   Style="{StaticResource textoLogo}"
+                                   VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Border>
+                <!--#endregion-->
                 <WrapPanel VerticalAlignment="Center"
                            Grid.Column="2"
                            Margin="0,0,20,0"
                            HorizontalAlignment="Right">
-                    <Border Background="{StaticResource Ligero}"
+                    <Border Background="{StaticResource grisClaro}"
                             CornerRadius="25"
                             Padding="5"
+                            Height="45"
                             BorderThickness="0"
                             Width="150">
                         <Grid>
@@ -85,20 +80,21 @@
                                        Margin="10,0,0,0"
                                        VerticalAlignment="Center"
                                        FontSize="15"
+                                       HorizontalAlignment="Right"
                                        TextWrapping="Wrap"
                                        TextTrimming="CharacterEllipsis"
                                        Style="{StaticResource FontFamily}" />
                             <Border CornerRadius="50"
                                     Padding="10"
                                     Grid.RowSpan="2"
-                                    Width="40"
+                                    Width="35"
                                     Grid.Column="1"
                                     HorizontalAlignment="Right"
-                                    Height="40"
+                                    Height="35"
                                     Background="{StaticResource Fuerte}">
                                 <materialDesign:PackIcon Kind="Account"
-                                                         Height="30"
-                                                         Width="30"
+                                                         Height="20"
+                                                         Width="20"
                                                          Foreground="#fff"
                                                          VerticalAlignment="Center"
                                                          HorizontalAlignment="Center" />
@@ -106,153 +102,195 @@
                         </Grid>
                     </Border>
                     <Border CornerRadius="25"
-                            Width="50"
+                            Width="45"
+                            Height="45"
                             Margin="10,0,0,0"
-                            Background="{StaticResource Ligero}">
+                            Background="{StaticResource grisClaro}">
                         <materialDesign:PackIcon VerticalAlignment="Center"
-                                                 Height="30"
-                                                 Width="30"
+                                                 Height="20"
+                                                 Width="20"
                                                  HorizontalAlignment="Center"
-                                                 Foreground="#fff"
+                                                 Foreground="{StaticResource Fuerte}"
                                                  Kind="Bell" />
                     </Border>
                     <Border CornerRadius="25"
-                            Width="50"
+                            Width="45"
+                            Height="45"
                             Margin="10,0,0,0"
-                            Background="{StaticResource Ligero}">
+                            Background="{StaticResource grisClaro}">
                         <materialDesign:PackIcon VerticalAlignment="Center"
-                                                 Height="30"
-                                                 Width="30"
+                                                 Height="20"
+                                                 Width="20"
                                                  HorizontalAlignment="Center"
-                                                 Foreground="#fff"
+                                                 Foreground="{StaticResource Fuerte}"
                                                  Kind="FacebookMessenger" />
                     </Border>
                 </WrapPanel>
             </Grid>
         </Border>
         <!--#ENDREGION FILA UNO GRID MENU ARRIBA-->
+        <!--#REGION MENU LATERAL IZQUIERDO-->
         <Border Background="{StaticResource Primario}"
                 Grid.Row="1"
                 CornerRadius="10"
-                Margin="10,10,10,10"></Border>
+                Margin="10,10,10,10">
+            <Border.Resources>
+                <Style TargetType="materialDesign:PackIcon">
+                    <Setter Property="Foreground"
+                            Value="{StaticResource Negro}" />
+                    <Setter Property="Width"
+                            Value="35" />
+                    <Setter Property="Height"
+                            Value="35" />
+                </Style>
+                <Style TargetType="TextBlock"
+                       BasedOn="{StaticResource FontFamily}">
+                    <Setter Property="VerticalAlignment"
+                            Value="Center" />
+                    <Setter Property="FontSize"
+                            Value="15" />
+                    <Setter Property="Foreground"
+                            Value="{StaticResource Fuerte}" />
+                </Style>
+            </Border.Resources>
+            <StackPanel Margin="0,20,0,0"
+                        HorizontalAlignment="Center">
+                <RadioButton Style="{StaticResource botonesMenu}">
+                    <RadioButton.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="Inicio"
+                                       Foreground="#fff" />
+                        </ToolTip>
+                    </RadioButton.ToolTip>
+                    <materialDesign:PackIcon Kind="Home" />
+                </RadioButton>
+                <RadioButton Style="{StaticResource botonesMenu}">
+                    <RadioButton.ToolTip>
+                        <ToolTip Margin="10,0,0,0">
+                            <TextBlock Text="Departamentos"
+                                       Foreground="#fff" />
+                        </ToolTip>
+                    </RadioButton.ToolTip>
+                    <materialDesign:PackIcon Kind="Domain" />
+                </RadioButton>
+            </StackPanel>
+        </Border>
+        <!--#ENDREGION MENU LATERAL IZQUIERDO-->
         <!--#REGION FILA 2 COLUMNA 1-->
         <Grid Grid.Column="1"
               Grid.Row="1">
-            <!--#REGION ACTIVIDADES-->
-            <Border Background="{StaticResource Primario}"
-                    CornerRadius="20"
-                    Width="600"
-                    Height="500">
-                <Grid Margin="20,20,10,20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".12*" />
-                        <ColumnDefinition Width=".78*" />
-                        <ColumnDefinition Width=".1*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height=".13*" />
-                        <RowDefinition Height=".2*" />
-                        <RowDefinition Height=".7*" />
-                    </Grid.RowDefinitions>
-                    <!--#REGION FOTO DE PERFIL-->
-                    <Border CornerRadius="50"
-                            Width="50"
-                            HorizontalAlignment="Left"
-                            Margin="10,0,0,0"
-                            Height="50">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Assets/Imagenes/user.jpg"
-                                        Stretch="Fill" />
-                        </Border.Background>
-                    </Border>
-                    <!--#ENDREGION FOTO DE PERFIL-->
-                    <!--#REGION NOMBRE DE USUARIO-->
-                    <StackPanel Grid.Column="1"
-                                Margin="5,0,0,0"
-                                VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource TextoUser}"
-                                   Text="Fabian" />
-                        <TextBlock Style="{StaticResource TextoFecha}"
-                                   Text="Publicado: 10/5/2024" />
-                    </StackPanel>
-                    <!--#ENDREGION NOMBRE DE USUARIO-->
-                    <!--#REGION DESCRIPCION-->
-                    <TextBlock Style="{StaticResource Descripcion}"
-                               Grid.Row="1"
-                               Grid.ColumnSpan="2"
-                               Text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor repudiandae dolorum maxime minima quidem fugiat corporis sequi animi deserunt quaerat. Minus similique omnis reiciendis commodi placeat inventore autem delectus repellendus." />
-                    <!--#ENDREGION DESCRIPCION-->
-                    
-                    <!--#REGION ICONOS AL LADO DERECHO-->
-                    <StackPanel Grid.Row="2"
-                                VerticalAlignment="Center"
-                                Grid.Column="2">
-                        <Border CornerRadius="25"
-                                Width="40"
-                                Height="40"
-                                Margin="0,10,0,0"
-                                Background="{StaticResource Ligero}">
-                            <materialDesign:PackIcon VerticalAlignment="Center"
-                                                     Height="30"
-                                                     Width="30"
-                                                     HorizontalAlignment="Center"
-                                                     Foreground="#fff"
-                                                     Kind="SendOutline" />
-                        </Border>
-                        <Border CornerRadius="25"
-                                Width="40"
-                                Height="40"
-                                Margin="0,20,0,0"
-                                Background="{StaticResource Ligero}">
-                            <materialDesign:PackIcon VerticalAlignment="Center"
-                                                     Height="30"
-                                                     Width="30"
-                                                     HorizontalAlignment="Center"
-                                                     Foreground="#fff"
-                                                     Kind="HeartOutline" />
-                        </Border>
-                        <Border CornerRadius="25"
-                                Width="40"
-                                Height="40"
-                                Margin="0,20,0,0"
-                                Background="{StaticResource Ligero}">
-                            <materialDesign:PackIcon VerticalAlignment="Center"
-                                                     Height="30"
-                                                     Width="30"
-                                                     HorizontalAlignment="Center"
-                                                     Foreground="#fff"
-                                                     Kind="CommentOutline" />
-                        </Border>
-                        <Border CornerRadius="25"
-                                Width="40"
-                                Height="40"
-                                Margin="0,20,0,0"
-                                Background="{StaticResource Ligero}">
-                            <materialDesign:PackIcon VerticalAlignment="Center"
-                                                     Height="30"
-                                                     Width="30"
-                                                     HorizontalAlignment="Center"
-                                                     Foreground="#fff"
-                                                     Kind="BookmarkOutline" />
-                        </Border>
-                    </StackPanel>
-                    
-                    <!--#ENDREGION ICONOS AL LADO DERECHO-->
-                    
-                    <!--#REGION IMAGEN-->
-                    <Border Grid.ColumnSpan="2"
-                            CornerRadius="10"
-                            Margin="10"
-                            Grid.Row="2">
-                        <Border.Background>
-                            <ImageBrush ImageSource="/Assets/Imagenes/imagen1.jpeg" />
-                        </Border.Background>
-                    </Border>
-                    <!--#ENDREGION IMAGEN-->
-                </Grid>
-            </Border>
-            <!--#ENDREGION ACTIVIDADES-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".88*" />
+                <ColumnDefinition Width=".12*" />
+            </Grid.ColumnDefinitions>
+            <ScrollViewer  Grid.ColumnSpan="1"
+                           Margin="10">
+                <WrapPanel Orientation="Horizontal">
+                    <!--#REGION ACTIVIDADES-->
+                    <local:PlantillaView Margin="20,20,0,0" />
+                    <local:PlantillaView Margin="20,20,0,0" />
+                    <local:PlantillaView Margin="20,20,0,0" />
+                    <!--#ENDREGION ACTIVIDADES-->
+                </WrapPanel>
+            </ScrollViewer>
+            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    Grid.Column="1"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Center"
+                    Background="{StaticResource Fuerte}"
+                    BorderThickness="0"
+                    Margin="10,10,20,40"
+                    Padding="0">
+                <materialDesign:PackIcon Kind="Plus"
+                                         Height="50"
+                                         Width="50"
+                                         Margin="0"
+                                         Foreground="#fff"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center" />
+            </Button>
         </Grid>
         <!--#ENDEGION FILA 2 COLUMNA 1-->
+        <!--#REGION DEPARTAMENTOS-->
+        <Border Padding="10,20"
+                Grid.Row="1"
+                Grid.Column="2"
+                CornerRadius="10"
+                Margin="0,10,10,10"
+                Background="{StaticResource Primario}">
+            <StackPanel>
+                <TextBlock Style="{StaticResource FontFamily}"
+                           Text="Departamentos"
+                           Margin="10,10,10,0"
+                           FontSize="25"
+                           Foreground="#fff" />
+                <Border Background="{StaticResource grisClaro}"
+                        CornerRadius="5"
+                        Padding="10"
+                        Margin="10"
+                        Height="50">
+                    <Grid>
+                        <TextBox BorderThickness="0"
+                                 FontSize="15"
+                                 materialDesign:HintAssist.Hint="Buscar departamento" />
+                    </Grid>
+                </Border>
+                <StackPanel Margin="0,10,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".3*" />
+                            <ColumnDefinition Width=".7*" />
+                        </Grid.ColumnDefinitions>
+                        <Border CornerRadius="50"
+                                Width="70"
+                                Height="70"
+                                Background="{StaticResource grisClaro}" />
+                        <StackPanel Grid.Column="1"
+                                    Margin="0,0,0,10"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left">
+                            <TextBlock Style="{StaticResource FontFamily}"
+                                       Text="Direccion Academica"
+                                       TextTrimming="CharacterEllipsis"
+                                       Margin="0,10,10,0"
+                                       FontSize="20"
+                                       Foreground="#fff" />
+                            <TextBlock Style="{StaticResource FontFamily}"
+                                       Text="Departamentos"
+                                       Margin="0,0,10,0"
+                                       FontSize="15"
+                                       Foreground="{StaticResource Ligero}" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".3*" />
+                            <ColumnDefinition Width=".7*" />
+                        </Grid.ColumnDefinitions>
+                        <Border CornerRadius="50"
+                                Width="70"
+                                Height="70"
+                                Background="{StaticResource grisClaro}" />
+                        <StackPanel Grid.Column="1"
+                                    Margin="0,0,0,10"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left">
+                            <TextBlock Style="{StaticResource FontFamily}"
+                                       Text="DIRECCIÓN DE PLANEACIÓN Y VINCULACIÓN"
+                                       TextTrimming="CharacterEllipsis"
+                                       Margin="0,10,10,0"
+                                       FontSize="20"
+                                       Foreground="#fff" />
+                            <TextBlock Style="{StaticResource FontFamily}"
+                                       Text="Departamentos"
+                                       Margin="0,0,10,0"
+                                       FontSize="15"
+                                       Foreground="{StaticResource Ligero}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <!--#ENDREGION DEPARTAMENTOS-->
     </Grid>
 </UserControl>

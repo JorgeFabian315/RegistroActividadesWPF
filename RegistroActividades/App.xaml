@@ -6,10 +6,9 @@
              StartupUri="/Views/MainView.xaml">
     <Application.Resources>
         <ResourceDictionary xmlns:system="clr-namespace:System;assembly=mscorlib">
-            
             <Color x:Key="grisClaroColor">#eaecee</Color>
             <SolidColorBrush x:Key="grisClaro"
-                             Color="{StaticResource grisClaroColor}"/>
+                             Color="{StaticResource grisClaroColor}" />
             <Color x:Key="colorgris">#4B4F59</Color>
             <SolidColorBrush x:Key="gris"
                              Color="{StaticResource colorgris}" />
@@ -33,7 +32,73 @@
                 <Setter Property="FontFamily"
                         Value="/Assets/Fonts/#Montserrat"></Setter>
             </Style>
-            
+            <Style TargetType="TextBlock"
+                   x:Key="TextoUser"
+                   BasedOn="{StaticResource FontFamily}">
+                <Setter Property="FontSize"
+                        Value="30" />
+                <Setter Property="Foreground"
+                        Value="{StaticResource grisClaro}" />
+            </Style>
+            <Style TargetType="TextBlock"
+                   x:Key="TextoFecha"
+                   BasedOn="{StaticResource FontFamily}">
+                <Setter Property="Foreground"
+                        Value="{StaticResource grisClaro}" />
+                <Setter Property="FontSize"
+                        Value="12" />
+            </Style>
+            <Style TargetType="TextBlock"
+                   x:Key="Descripcion"
+                   BasedOn="{StaticResource FontFamily}">
+                <Setter Property="TextWrapping"
+                        Value="Wrap" />
+                <Setter Property="Foreground"
+                        Value="{StaticResource grisClaro}" />
+                <Setter Property="Margin"
+                        Value="15,3,15,3" />
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="TextAlignment"
+                        Value="Left" />
+                <Setter Property="TextTrimming"
+                        Value="CharacterEllipsis" />
+            </Style>
+            <Style TargetType="RadioButton"
+                   x:Key="botonesMenu">
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="Margin"
+                        Value="10,10,20,0" />
+             
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Border CornerRadius="10"
+                                    Padding="10"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="#fff" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="#fff" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+         
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:BundledTheme BaseTheme="Light"
                                              PrimaryColor="Grey"
