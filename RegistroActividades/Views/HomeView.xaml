@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:RegistroActividades.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d"
              d:DesignHeight="800"
              d:DesignWidth="1300">
@@ -12,7 +13,7 @@
           Background="#fff">
         <Grid.Resources></Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="110" />
             <ColumnDefinition Width=".7*" />
             <ColumnDefinition Width=".3*" />
         </Grid.ColumnDefinitions>
@@ -52,9 +53,6 @@
                                         Value="DemiBold" />
                             </Style>
                         </WrapPanel.Resources>
-                        <!--<Image Source="/Assets/Imagenes/logoSVG.svg"
-                               Height="50" 
-                               Width="50"/>-->
                         <TextBlock Text="TECNM - Región Carbonífera"
                                    Style="{StaticResource textoLogo}"
                                    VerticalAlignment="Center" />
@@ -176,121 +174,27 @@
             </StackPanel>
         </Border>
         <!--#ENDREGION MENU LATERAL IZQUIERDO-->
-        <!--#REGION FILA 2 COLUMNA 1-->
-        <Grid Grid.Column="1"
-              Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".88*" />
-                <ColumnDefinition Width=".12*" />
-            </Grid.ColumnDefinitions>
-            <ScrollViewer  Grid.ColumnSpan="1"
-                           Margin="10">
-                <WrapPanel Orientation="Horizontal">
-                    <!--#REGION ACTIVIDADES-->
-                    <local:PlantillaView Margin="20,20,0,0" />
-                    <local:PlantillaView Margin="20,20,0,0" />
-                    <local:PlantillaView Margin="20,20,0,0" />
-                    <!--#ENDREGION ACTIVIDADES-->
-                </WrapPanel>
-            </ScrollViewer>
-            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                    Grid.Column="1"
-                    VerticalAlignment="Bottom"
-                    HorizontalContentAlignment="Center"
-                    Background="{StaticResource Fuerte}"
-                    BorderThickness="0"
-                    Margin="10,10,20,40"
-                    Padding="0">
-                <materialDesign:PackIcon Kind="Plus"
-                                         Height="50"
-                                         Width="50"
-                                         Margin="0"
-                                         Foreground="#fff"
-                                         HorizontalAlignment="Center"
-                                         VerticalAlignment="Center" />
-            </Button>
-        </Grid>
-        <!--#ENDEGION FILA 2 COLUMNA 1-->
-        <!--#REGION DEPARTAMENTOS-->
-        <Border Padding="10,20"
-                Grid.Row="1"
-                Grid.Column="2"
-                CornerRadius="10"
-                Margin="0,10,10,10"
-                Background="{StaticResource Primario}">
-            <StackPanel>
-                <TextBlock Style="{StaticResource FontFamily}"
-                           Text="Departamentos"
-                           Margin="10,10,10,0"
-                           FontSize="25"
-                           Foreground="#fff" />
-                <Border Background="{StaticResource grisClaro}"
-                        CornerRadius="5"
-                        Padding="10"
-                        Margin="10"
-                        Height="50">
-                    <Grid>
-                        <TextBox BorderThickness="0"
-                                 FontSize="15"
-                                 materialDesign:HintAssist.Hint="Buscar departamento" />
-                    </Grid>
-                </Border>
-                <StackPanel Margin="0,10,0,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".3*" />
-                            <ColumnDefinition Width=".7*" />
-                        </Grid.ColumnDefinitions>
-                        <Border CornerRadius="50"
-                                Width="70"
-                                Height="70"
-                                Background="{StaticResource grisClaro}" />
-                        <StackPanel Grid.Column="1"
-                                    Margin="0,0,0,10"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left">
-                            <TextBlock Style="{StaticResource FontFamily}"
-                                       Text="Direccion Academica"
-                                       TextTrimming="CharacterEllipsis"
-                                       Margin="0,10,10,0"
-                                       FontSize="20"
-                                       Foreground="#fff" />
-                            <TextBlock Style="{StaticResource FontFamily}"
-                                       Text="Departamentos"
-                                       Margin="0,0,10,0"
-                                       FontSize="15"
-                                       Foreground="{StaticResource Ligero}" />
-                        </StackPanel>
-                    </Grid>
-                    <Grid Margin="0,10,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".3*" />
-                            <ColumnDefinition Width=".7*" />
-                        </Grid.ColumnDefinitions>
-                        <Border CornerRadius="50"
-                                Width="70"
-                                Height="70"
-                                Background="{StaticResource grisClaro}" />
-                        <StackPanel Grid.Column="1"
-                                    Margin="0,0,0,10"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left">
-                            <TextBlock Style="{StaticResource FontFamily}"
-                                       Text="DIRECCIÓN DE PLANEACIÓN Y VINCULACIÓN"
-                                       TextTrimming="CharacterEllipsis"
-                                       Margin="0,10,10,0"
-                                       FontSize="20"
-                                       Foreground="#fff" />
-                            <TextBlock Style="{StaticResource FontFamily}"
-                                       Text="Departamentos"
-                                       Margin="0,0,10,0"
-                                       FontSize="15"
-                                       Foreground="{StaticResource Ligero}" />
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-            </StackPanel>
-        </Border>
-        <!--#ENDREGION DEPARTAMENTOS-->
+        <ContentControl Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1">
+            <ContentControl.Resources>
+                <local:ListaActividadesView  x:Key="listaActividadesView" />
+                <local:AgregarActividadView x:Key="agregarActividadView" />
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding VistaActividad}"
+                                     Value="{x:Static local:VistaActividades.Listado}">
+                            <Setter Property="Content"  
+                                    Value="{StaticResource listaActividadesView}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding VistaActividad}"
+                                     Value="{x:Static local:VistaActividades.Agregar}">
+                            <Setter Property="Content"
+                                    Value="{StaticResource agregarActividadView}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Resources>
+        </ContentControl>
     </Grid>
 </UserControl>

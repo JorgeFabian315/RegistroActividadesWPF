@@ -133,6 +133,7 @@
                                                  VerticalAlignment="Center" />
                         <TextBox BorderThickness="0"
                                  FontSize="15"
+                                 Text="{Binding Usuario.Username}"
                                  materialDesign:TextFieldAssist.HasClearButton="True"
                                  VerticalAlignment="Bottom"
                                  Padding="10"
@@ -161,8 +162,15 @@
                                                  Width="25"
                                                  Height="25"
                                                  VerticalAlignment="Center" />
+                        <TextBox Visibility="Collapsed"
+                                 Name="txtPassword"
+                                 Text="{Binding Usuario.Password, UpdateSourceTrigger= PropertyChanged}" />
+                        
                         <PasswordBox BorderThickness="0"
                                      FontSize="15"
+                                     Name="pwb"
+                                     Loaded="pwb_Loaded"
+                                     LostFocus="pwb_LostFocus"
                                      VerticalAlignment="Bottom"
                                      VerticalContentAlignment="Center"
                                      Padding="10"
@@ -173,7 +181,8 @@
                                      Grid.Column="1" />
                     </Grid>
                 </Border>
-                <Button Style="{StaticResource BotonesBackground}">
+                <Button Style="{StaticResource BotonesBackground}"
+                        Command="{Binding IniciarSesionCommand}">
                     <WrapPanel VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource FontFamily}"
                                    Text="Iniciar sesión"
@@ -185,24 +194,6 @@
                                                  Height="20" />
                     </WrapPanel>
                 </Button>
-                <!--<WrapPanel    HorizontalAlignment="Center"
-                              Width="320">
-                    <TextBlock Style="{StaticResource FontFamily}"
-                               FontSize="15"
-                               Text="¿No tienes una cuenta?"
-                               Margin="0,10,0,10" />
-                    <Button Style="{x:Null}"
-                            Margin="5,0,0,0"
-                            Cursor="Hand"
-                            Background="Transparent"
-                            BorderThickness="0">
-                        <TextBlock Style="{StaticResource FontFamily}"
-                                   Foreground="{StaticResource Morado}"
-                                   FontSize="15"
-                                   VerticalAlignment="Center"
-                                   Text="Crea una." />
-                    </Button>
-                </WrapPanel>-->
                 <Border Style="{StaticResource botonesGoogleFacebook}">
                     <WrapPanel>
                         <Image Source="/Assets/Imagenes/google.png" />
@@ -217,6 +208,12 @@
                                    Style="{StaticResource botonesGoogleFacebook-texto}" />
                     </WrapPanel>
                 </Border>
+                <TextBlock Text="{Binding LoginError}"
+                           Foreground="Red"
+                           HorizontalAlignment="Center"
+                           Margin="0,10,0,0"
+                           FontSize="15"
+                           Style="{StaticResource FontFamily}" />
             </StackPanel>
         </Border>
     </Grid>

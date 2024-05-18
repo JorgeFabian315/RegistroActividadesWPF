@@ -16,26 +16,13 @@ using System.Windows.Shapes;
 namespace RegistroActividades.Views
 {
     /// <summary>
-    /// Lógica de interacción para LoginView.xaml
+    /// Lógica de interacción para ListaActividadesView.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class ListaActividadesView : UserControl
     {
-        public LoginView()
+        public ListaActividadesView()
         {
             InitializeComponent();
-        }
-
-        private void pwb_Loaded(object sender, RoutedEventArgs e)
-        {
-            pwb.Clear();
-
-        }
-
-        private void pwb_LostFocus(object sender, RoutedEventArgs e)
-        {
-            txtPassword.Text = "";
-            txtPassword.Text = pwb.Password;
-
         }
     }
 }
