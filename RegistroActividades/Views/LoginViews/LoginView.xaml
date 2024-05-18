@@ -182,7 +182,7 @@
                     </Grid>
                 </Border>
                 <Button Style="{StaticResource BotonesBackground}"
-                        Command="{Binding IniciarSesionCommand}">
+                        Command="{Binding LoginCommand}">
                     <WrapPanel VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource FontFamily}"
                                    Text="Iniciar sesión"
