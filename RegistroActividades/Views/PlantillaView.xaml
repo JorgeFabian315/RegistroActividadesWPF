@@ -93,6 +93,7 @@
                                              Width="25"
                                              HorizontalAlignment="Center"
                                              Foreground="#fff"
+                                             
                                              Kind="CommentOutline" />
                 </Border>
                 <Border CornerRadius="25"
