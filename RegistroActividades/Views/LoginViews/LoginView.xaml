@@ -133,7 +133,7 @@
                                                  VerticalAlignment="Center" />
                         <TextBox BorderThickness="0"
                                  FontSize="15"
-                                 Text="{Binding Usuario.Username}"
+                                 Text="{Binding Username}"
                                  materialDesign:TextFieldAssist.HasClearButton="True"
                                  VerticalAlignment="Bottom"
                                  Padding="10"
@@ -164,7 +164,7 @@
                                                  VerticalAlignment="Center" />
                         <TextBox Visibility="Collapsed"
                                  Name="txtPassword"
-                                 Text="{Binding Usuario.Password, UpdateSourceTrigger= PropertyChanged}" />
+                                 Text="{Binding Password, UpdateSourceTrigger= PropertyChanged}" />
                         
                         <PasswordBox BorderThickness="0"
                                      FontSize="15"
@@ -182,7 +182,7 @@
                     </Grid>
                 </Border>
                 <Button Style="{StaticResource BotonesBackground}"
-                        Command="{Binding LoginCommand}">
+                        Command="{Binding IniciarSesionCommand}">
                     <WrapPanel VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource FontFamily}"
                                    Text="Iniciar sesión"

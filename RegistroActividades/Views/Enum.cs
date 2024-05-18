@@ -9,13 +9,12 @@
     {
         Listado = 1,
         Agregar = 2,
-        Departamentos = 3,
-        AgregarDepartamento = 4,
     }
 
-    public enum VistaLogin
+    public enum VistaDepartamentos
     {
-        Login = 1,
+        Listado = 1,
+        Agregar = 2,
     }
 
 }

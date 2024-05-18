@@ -1,4 +1,4 @@
-﻿using RegistroActividades.Models.Entities;
+﻿using RegistroDeActividades.Models.DTOS;
 using System.Net.Http;
 using System.Net.Http.Json;
 
@@ -16,7 +16,7 @@ namespace RegistroActividades.Servicies
         }
 
 
-        public async Task<string?> IniciarSesion(Usuario user)
+        public async Task<string?> IniciarSesion(LoginDTO user)
         {
             var response = await _client.PostAsJsonAsync("login", user);
 
