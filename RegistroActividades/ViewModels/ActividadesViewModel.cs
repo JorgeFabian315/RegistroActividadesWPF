@@ -4,12 +4,6 @@ using RegistroActividades.Models.Entities;
 using RegistroActividades.Servicies;
 using RegistroActividades.Views;
 using RegistroDeActividades.Models.DTOS;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistroActividades.ViewModels
 {
@@ -62,7 +56,7 @@ namespace RegistroActividades.ViewModels
                         LoginError = "Error en el usuario o contraseña.";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LoginError = ex.Message.ToString();
             }

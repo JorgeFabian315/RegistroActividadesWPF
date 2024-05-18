@@ -1,6 +1,4 @@
-﻿using RegistroDeActividades.Models.Entities;
-
-namespace RegistroDeActividades.Models.DTOS
+﻿namespace RegistroDeActividades.Models.DTOS
 {
     public class ActividadDTO
     {
@@ -22,6 +20,6 @@ namespace RegistroDeActividades.Models.DTOS
 
         public int DepartamentoId { get; set; }
 
-        public string? Imagen { get; set; } 
+        public string? Imagen { get; set; }
     }
 }

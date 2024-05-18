@@ -6,6 +6,7 @@
         xmlns:vm="clr-namespace:RegistroActividades.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegistroActividades.Views"
+        xmlns:loginviews="clr-namespace:RegistroActividades.Views.LoginViews"
         mc:Ignorable="d"
         Title="MainView"
         WindowStartupLocation="CenterScreen"
@@ -14,31 +15,15 @@
         MinWidth="1200"
         Width="1300">
     <Window.DataContext>
-        <vm:ActividadesViewModel />
+        <vm:MainViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+            <loginviews:LoginControl></loginviews:LoginControl>
+        </DataTemplate>
+    
+    </Window.Resources>
     <Grid>
-        <ContentControl Margin="0">
-            <ContentControl.Resources>
-                <local:LoginView x:Key="loginView" />
-                <local:HomeView x:Key="HomeView" />
-                <Style TargetType="ContentControl">
-                    <Setter Property="Content"
-                            Value="{StaticResource HomeView}" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding VistaInicio}"
-                                     Value="{x:Static local:VistaInicio.Home}">
-                            <Setter Property="Content"
-                                    Value="{StaticResource HomeView}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding VistaInicio}"
-                                     Value="{x:Static local:VistaInicio.Login}">
-                            <Setter Property="Content"
-                                    Value="{StaticResource loginView}" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                    
-                </Style>
-            </ContentControl.Resources>
-        </ContentControl>
+        <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>
 </Window>

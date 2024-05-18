@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="RegistroActividades.Views.ListaActividadesView"
+﻿<UserControl x:Class="RegistroActividades.Views.Actividades.ListaActividadesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:RegistroActividades.Views"
+             xmlns:local="clr-namespace:RegistroActividades.Views" xmlns:actividades="clr-namespace:RegistroActividades.Views.Actividades"
              mc:Ignorable="d"
              d:DesignHeight="700"
              Background="#fff"
@@ -22,9 +22,9 @@
                 <WrapPanel Orientation="Horizontal"
                            HorizontalAlignment="Center">
                     <!--#REGION ACTIVIDADES-->
-                    <local:PlantillaView Margin="20,20,0,0" />
-                    <local:PlantillaView Margin="20,20,0,0" />
-                    <local:PlantillaView Margin="20,20,0,0" />
+                    <actividades:PlantillaView Margin="20,20,0,0" />
+                    <actividades:PlantillaView Margin="20,20,0,0" />
+                    <actividades:PlantillaView Margin="20,20,0,0" />
                     <!--#ENDREGION ACTIVIDADES-->
                 </WrapPanel>
             </ScrollViewer>

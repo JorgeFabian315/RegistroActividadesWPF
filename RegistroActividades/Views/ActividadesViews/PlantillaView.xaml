@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="RegistroActividades.Views.PlantillaView"
+﻿<UserControl x:Class="RegistroActividades.Views.Actividades.PlantillaView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -31,7 +31,7 @@
                     Margin="10,0,0,0"
                     Height="50">
                 <Border.Background>
-                    <ImageBrush ImageSource="../Assets/Imagenes/user.jpg"
+                    <ImageBrush ImageSource="../../Assets/Imagenes/user.jpg"
                                 Stretch="Fill" />
                 </Border.Background>
             </Border>
@@ -117,7 +117,7 @@
                     Margin="10"
                     Grid.Row="2">
                 <Border.Background>
-                    <ImageBrush ImageSource="../Assets/Imagenes/imagen1.jpeg" />
+                    <ImageBrush ImageSource="../../Assets/Imagenes/imagen1.jpeg" />
                 </Border.Background>
             </Border>
             <TextBlock Text="Direccion Academica"

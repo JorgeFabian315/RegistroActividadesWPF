@@ -1,11 +1,6 @@
 ﻿using RegistroDeActividades.Models.Entities;
 using SQLite;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RegistroActividades.Repositories
 {
@@ -17,7 +12,7 @@ namespace RegistroActividades.Repositories
         SQLiteConnection context;
         public ActividadesRepository()
         {
-            string ruta = Path.Combine( Environment.CurrentDirectory +"/actividades.db3");
+            string ruta = Path.Combine(Environment.CurrentDirectory + "/actividades.db3");
             context = new(ruta);
             context.CreateTable<Actividades>();
         }

@@ -1,6 +1,4 @@
-﻿using RegistroDeActividades.Models.Entities;
-
-namespace RegistroDeActividades.Models.DTOS
+﻿namespace RegistroDeActividades.Models.DTOS
 {
     public class DepartamentoDTO
     {
@@ -17,7 +15,7 @@ namespace RegistroDeActividades.Models.DTOS
 
         //public  List<ActividadDTO> Actividades { get; set; } = new List<ActividadDTO>();
 
-        public  string? DepartamentoSuperior { get; set; }
+        public string? DepartamentoSuperior { get; set; }
 
     }
 }

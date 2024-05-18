@@ -4,6 +4,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:RegistroActividades"
              StartupUri="/Views/MainView.xaml">
+    
+    
     <Application.Resources>
         <ResourceDictionary xmlns:system="clr-namespace:System;assembly=mscorlib">
             <Color x:Key="grisClaroColor">#eaecee</Color>
@@ -107,4 +109,5 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
+
 </Application>

@@ -1,12 +1,6 @@
 ﻿using RegistroActividades.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace RegistroActividades.Servicies
 {
@@ -30,7 +24,7 @@ namespace RegistroActividades.Servicies
 
             if (response.IsSuccessStatusCode)
             {
-                var token =  await response.Content.ReadAsStringAsync();
+                var token = await response.Content.ReadAsStringAsync();
 
                 _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
