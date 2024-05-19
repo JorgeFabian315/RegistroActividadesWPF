@@ -8,40 +8,46 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Border Background="{StaticResource Primario}"
         CornerRadius="20"
-       
+        Padding="20,0"
         Height="50">
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock  VerticalAlignment="Center" FontWeight="Medium" Foreground="#fff" Margin="0,0,12,0">
-                Departamento de Ingenieria en Sistemas Computacionales
-            </TextBlock>
-            <WrapPanel>
+        <Grid  VerticalAlignment="Center" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".9*"></ColumnDefinition>
+                <ColumnDefinition Width=".1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock FontSize="20" TextAlignment="Left"
+                       VerticalAlignment="Center" FontWeight="Medium"
+                       Foreground="#fff" Margin="0,0,12,0"
+                        Grid.ColumnSpan="6"
+                       Text="{Binding Nombre}" />
+            <WrapPanel Grid.ColumnSpan="2" Grid.Column="2">
                 <Border CornerRadius="25"
-                       Width="40"
-                       Height="40"
+                       Width="30"
+                       Height="30"
                        Padding="5"
                        Background="{StaticResource Ligero}">
                     <materialDesign:PackIcon VerticalAlignment="Center"
-                        Height="25"
-                        Width="25"
+                        Height="20"
+                        Width="20"
                         HorizontalAlignment="Center"
                         Foreground="#fff"
                         Kind="Delete" />
                 </Border>
                 <Border CornerRadius="25"
                     Margin="10,0,0,0"
-                    Width="40"
-                    Height="40"
+                    Width="30"
+                    Height="30"
                     Padding="5"
                     Background="{StaticResource Ligero}">
                     <materialDesign:PackIcon VerticalAlignment="Center"
-                     Height="25"
-                     Width="25"
+                     Height="20"
+                     Width="20"
                      HorizontalAlignment="Center"
                      Foreground="#fff"
                      Kind="Edit" />
                 </Border>
             </WrapPanel>
-        </StackPanel>
+        </Grid>
 
     </Border>
 </UserControl>
