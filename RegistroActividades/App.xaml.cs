@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using RegistroActividades.Servicies;
+using System.Windows;
 
 namespace RegistroActividades
 {
@@ -6,7 +7,16 @@ namespace RegistroActividades
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    {
-    }
 
+    {
+        public static ActividadesService service = new();
+        public App()
+        {
+
+        }
+       
+
+     
+
+    }
 }

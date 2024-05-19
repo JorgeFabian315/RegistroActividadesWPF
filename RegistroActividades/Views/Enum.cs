@@ -2,19 +2,20 @@
 {
     public enum VistaInicio
     {
-        Login = 1,
-        Home = 2
+        Login,
+        Home
     }
     public enum VistaActividades
     {
-        Listado = 1,
-        Agregar = 2,
+        Listado,
+        Agregar,
+        VerMisActividades,
     }
 
     public enum VistaDepartamentos
     {
-        Listado = 1,
-        Agregar = 2,
+        Listado,
+        Agregar,
     }
 
 }

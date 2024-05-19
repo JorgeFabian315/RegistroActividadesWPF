@@ -107,22 +107,39 @@
                     <Border Background="{StaticResource grisClaro}"
                             CornerRadius="25"
                             Padding="5"
-                            Height="45"
+                            Height="50"
                             BorderThickness="0"
-                            Width="150">
+                            Width="300">
+                        <Border.ToolTip>
+                            <ToolTip>
+                                <TextBlock Text="{Binding Usuario.UserName}" />
+                            </ToolTip>
+                        </Border.ToolTip>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width=".7*" />
-                                <ColumnDefinition Width=".3*" />
+                                <ColumnDefinition Width=".8*" />
+                                <ColumnDefinition Width=".2*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Fabian"
-                                       Margin="10,0,0,0"
-                                       VerticalAlignment="Center"
-                                       FontSize="15"
-                                       HorizontalAlignment="Right"
-                                       TextWrapping="Wrap"
-                                       TextTrimming="CharacterEllipsis"
-                                       Style="{StaticResource FontFamily}" />
+                            <StackPanel>
+                                <TextBlock Text="{Binding Usuario.UserName}"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"
+                                           TextWrapping="NoWrap"
+                                           FontSize="15"
+                                           HorizontalAlignment="Right"
+                                           TextTrimming="CharacterEllipsis"
+                                           Style="{StaticResource FontFamily}" />
+                                <TextBlock Text="Ver Perfil"
+                                           HorizontalAlignment="Right"
+                                           FontSize="12"
+                                           Cursor="Hand"
+                                           Foreground="{StaticResource Morado}">
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding Gesture="LeftClick"
+                                                      Command="{Binding VerMisActividadesCommand}"/>
+                                    </TextBlock.InputBindings>
+                                </TextBlock>
+                            </StackPanel>
                             <Border CornerRadius="50"
                                     Padding="10"
                                     Grid.RowSpan="2"

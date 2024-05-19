@@ -28,17 +28,21 @@ namespace RegistroActividades.ViewModels
         [ObservableProperty]
         private bool usuarioConectado = false;  
 
-        private ActividadesService service = new();
 
         private ActividadesViewModel actividadesViewModel = new();
 
         private DepartamentosViewModel departamentosViewModel = new();
+
+        public static event Action? VerPerfilView;
+        public static event Action? VerListadpActividades;
 
         [ObservableProperty]
         private Usuario? usuario;
 
         public MainViewModel()
         {
+            Username = "DirectorGeneralEquipo2@gmail.com";
+            Password = "12345678";
             UsuarioConectado = false;
         }
 
@@ -56,7 +60,7 @@ namespace RegistroActividades.ViewModels
 
                 else
                 {
-                    var token = await service.IniciarSesion(user);
+                    var token = await App.service.IniciarSesion(user);
 
                     if (!string.IsNullOrWhiteSpace(token))
                     {
@@ -79,6 +83,7 @@ namespace RegistroActividades.ViewModels
                         };
                         
                         UsuarioConectado = true;
+                        Sincronizador();
                         CurrentViewModel = actividadesViewModel;
                     }
 
@@ -95,6 +100,7 @@ namespace RegistroActividades.ViewModels
         public void CambiarActividadesViewModel()
         {
             CurrentViewModel = actividadesViewModel;
+            VerListadpActividades?.Invoke();
         }
 
         [RelayCommand]
@@ -102,6 +108,37 @@ namespace RegistroActividades.ViewModels
         {
             CurrentViewModel = departamentosViewModel;
         }
+
+        [RelayCommand]
+        public void VerMisActividades()
+        {
+            VerPerfilView?.Invoke();
+        }
+
+
+
+
+
+
+
+        async void Sincronizador()
+        {
+            while (true)
+            {
+                await App.service.Get(); // _= Descartar la tarea 
+                Thread.Sleep(TimeSpan.FromMinutes(1));
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
     }
 }
