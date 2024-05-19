@@ -46,5 +46,21 @@ namespace RegistroActividades.Servicies
                 return null;
 
         }
+
+
+        public async Task<DepartamentoDTO> Post(DepartamentoCreateDTO departamento)
+        {
+            var response = await _client.PostAsJsonAsync("departamento", departamento);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var departamentoCreado = await response.Content.ReadFromJsonAsync<DepartamentoDTO>();
+
+                return departamentoCreado;
+            }
+            else
+                return null;
+
+        }
     }
 }

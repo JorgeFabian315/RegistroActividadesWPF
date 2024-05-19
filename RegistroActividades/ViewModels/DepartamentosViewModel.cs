@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using RegistroActividades.Servicies;
 using RegistroActividades.Views;
 using RegistroDeActividades.Models.DTOS;
@@ -9,6 +10,11 @@ namespace RegistroActividades.ViewModels
     {
 
         DepartamentosService departamentosService = new DepartamentosService();
+
+
+
+        [ObservableProperty]
+        private DepartamentoCreateDTO departamento;
 
         [ObservableProperty]
         private List<DepartamentoDTO> departamentos;
@@ -27,6 +33,30 @@ namespace RegistroActividades.ViewModels
         {
             Departamentos = await departamentosService.Get();
         }
+
+        [RelayCommand]
+        public void VerAgregarDepartamento()
+        {
+            VistaDepartamento = VistaDepartamentos.Agregar;
+        }
+
+        [RelayCommand]
+        public void VerListadoDepartamento()
+        {
+            VistaDepartamento = VistaDepartamentos.Listado;
+        }
+
+        [RelayCommand]
+        public async void GuardarDepartamento()
+        {
+
+            var departamentoCreado = await departamentosService.Post(Departamento);
+            GetDepartamentos();
+            VistaDepartamento = VistaDepartamentos.Listado;
+        }
+
+
+
 
     }
 }
