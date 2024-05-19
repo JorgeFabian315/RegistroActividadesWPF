@@ -13,6 +13,7 @@ namespace RegistroActividades.Servicies
         public DepartamentosService()
         {
             _client = new HttpClient() { BaseAddress = new Uri(url) };
+            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
         }
 
         public async Task<List<DepartamentoDTO>> Get()
