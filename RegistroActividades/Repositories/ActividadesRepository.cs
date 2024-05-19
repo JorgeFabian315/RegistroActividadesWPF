@@ -45,7 +45,10 @@ namespace RegistroActividades.Repositories
         }
 
 
-
+        public void DeleteAll()
+        {
+            context.DeleteAll<Actividades>();
+        }
 
 
 

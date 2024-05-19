@@ -77,7 +77,10 @@ namespace RegistroActividades.ViewModels
 
         public void ActualizarActividades()
         {
-            foreach (var a in _repository.GetAll())
+            Actividades.Clear();
+            var actividadesBD = _repository.GetAll().OrderBy(x => x.FechaActualizacion);
+
+            foreach (var a in actividadesBD)
             {
                 Actividades.Add(a);
             }

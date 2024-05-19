@@ -1,4 +1,5 @@
-﻿using RegistroDeActividades.Models.DTOS;
+﻿using RegistroActividades.Models.DTOS;
+using RegistroDeActividades.Models.DTOS;
 using System.Net.Http;
 using System.Net.Http.Json;
 

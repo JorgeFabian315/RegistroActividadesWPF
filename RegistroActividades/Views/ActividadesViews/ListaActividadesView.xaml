@@ -3,71 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:models="clr-namespace:RegistroDeActividades.Models.Entities"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:RegistroActividades.Views" xmlns:actividades="clr-namespace:RegistroActividades.Views.Actividades"
+             xmlns:local="clr-namespace:RegistroActividades.Views"
+             xmlns:actividades="clr-namespace:RegistroActividades.Views.Actividades"
              mc:Ignorable="d"
              d:DesignHeight="700"
              Background="#fff"
              d:DesignWidth="1080">
     <UserControl.Resources></UserControl.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".85*" />
-            <ColumnDefinition Width=".15*" />
-        </Grid.ColumnDefinitions>
         <!--#REGION FILA 2 COLUMNA 1-->
-        <Grid>
-            <ScrollViewer  Grid.ColumnSpan="1"
-                           Margin="10">
-                <WrapPanel Orientation="Horizontal"
-                           HorizontalAlignment="Center">
-                    <!--#REGION ACTIVIDADES-->
-                    <actividades:PlantillaView Margin="20,20,0,0" />
-                    <actividades:PlantillaView Margin="20,20,0,0" />
-                    <actividades:PlantillaView Margin="20,20,0,0" />
-                    <!--#ENDREGION ACTIVIDADES-->
-                </WrapPanel>
-            </ScrollViewer>
-        </Grid>
-        <Border Padding="20,5"
-                Background="{StaticResource Primario}"
-                CornerRadius="10"
-                Grid.Column="1"
-                Margin="10,10,10,0">
-            <StackPanel>
-                <TextBlock Text="Departamentos"
-                           Margin="0,20,0,20"
-                           Foreground="{StaticResource grisClaro}"
-                           FontSize="20"
-                           Style="{StaticResource FontFamily}" />
-                <WrapPanel VerticalAlignment="Center"
-                           Height="80"
-                           HorizontalAlignment="Left">
-                    <Border CornerRadius="50"
-                            Height="70"
-                            Margin="0,0,0,10"
-                            Cursor="Hand"
-                            BorderThickness="0"
-                            Background="{StaticResource grisClaro}"
-                            Width="70">
-                        <Border.ToolTip>
-                            <ToolTip>
-                                <TextBlock Text="Direccion General" />
-                            </ToolTip>
-                        </Border.ToolTip>
-                        <TextBlock Text="DG"
-                                   VerticalAlignment="Center"
-                                   Style="{StaticResource FontFamily}"
-                                   FontSize="30"
-                                   Foreground="{StaticResource Primario}"
-                                   HorizontalAlignment="Center" />
-                    </Border>
-                    <TextBlock Text="Direccion"
-                               TextTrimming="CharacterEllipsis"
-                               Style="{StaticResource FontFamily}" />
-                </WrapPanel>
-            </StackPanel>
-        </Border>
+        <ScrollViewer Margin="10,10,10,20" HorizontalContentAlignment="Center">
+            <ItemsControl ItemsSource="{Binding Actividades}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:Actividades">
+                        <actividades:PlantillaView Margin="20,20,0,0" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
         <!--#ENDREGION FILA 2 COLUMNA 1-->
     </Grid>
 </UserControl>

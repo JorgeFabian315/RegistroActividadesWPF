@@ -25,17 +25,6 @@ namespace RegistroActividades {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime UltimaFecha {
-            get {
-                return ((global::System.DateTime)(this["UltimaFecha"]));
-            }
-            set {
-                this["UltimaFecha"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Token {
             get {
@@ -43,6 +32,17 @@ namespace RegistroActividades {
             }
             set {
                 this["Token"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime UltimaFecha {
+            get {
+                return ((global::System.DateTime)(this["UltimaFecha"]));
+            }
+            set {
+                this["UltimaFecha"] = value;
             }
         }
     }

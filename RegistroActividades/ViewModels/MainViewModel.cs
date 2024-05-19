@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RegistroActividades.Models.Entities;
+using RegistroActividades.Repositories;
 using RegistroActividades.Servicies;
 using RegistroActividades.Views;
 using RegistroActividades.Views.LoginViews;
@@ -39,11 +40,16 @@ namespace RegistroActividades.ViewModels
         [ObservableProperty]
         private Usuario? usuario;
 
+        private ActividadesRepository _repository = new();
+
         public MainViewModel()
         {
             Username = "DirectorGeneralEquipo2@gmail.com";
             Password = "12345678";
             UsuarioConectado = false;
+            UserSettings.Default.UltimaFecha = DateTime.MinValue;
+            UserSettings.Default.Save();
+
         }
 
         [RelayCommand]
@@ -82,6 +88,8 @@ namespace RegistroActividades.ViewModels
                             Rol = roleClaim
                         };
                         
+                        _repository.DeleteAll();
+
                         UsuarioConectado = true;
                         Thread hilo = new Thread(Sincronizador) { IsBackground = true};
                         hilo.Start();
@@ -127,7 +135,7 @@ namespace RegistroActividades.ViewModels
             while (true)
             {
                 await App.service.Get(); // _= Descartar la tarea 
-                Thread.Sleep(TimeSpan.FromMinutes(1));
+                Thread.Sleep(TimeSpan.FromSeconds(30));
             }
         }
 

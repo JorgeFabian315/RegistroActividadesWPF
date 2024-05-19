@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Windows;
 
 namespace RegistroActividades.Servicies
@@ -38,7 +39,7 @@ namespace RegistroActividades.Servicies
 
                 _token = token;
 
-                RegistroActividades.UserSettings.Default.Token = token;
+                UserSettings.Default.Token = token;
                 UserSettings.Default.Save();
 
                 return token;
@@ -52,11 +53,12 @@ namespace RegistroActividades.Servicies
         {
             try
             {
-                var fecha = RegistroActividades.UserSettings.Default.UltimaFecha;
+                var fecha = UserSettings.Default.UltimaFecha;
 
                 bool aviso = false;
                 var response = await _client.GetFromJsonAsync<List<ActividadDTO>>($"actividad/{fecha:yyyy-MM-dd}/{fecha:HH}/{fecha:mm}");
-                if(response != null)
+                
+                if(response != null && response.Any())
                 {
                     foreach (var actividad in response)
                     {
@@ -74,6 +76,7 @@ namespace RegistroActividades.Servicies
                                 FechaRealizacion = actividad.FechaRealizacion ?? DateTime.UtcNow,
                                 IdDepartamento = actividad.DepartamentoId,
                                 Estado = actividad.Estado,
+                                NombreDepartamento = actividad.Departamento ?? string.Empty
                             };
 
                             _actividadesRepository.Insert(entidad);
@@ -100,15 +103,15 @@ namespace RegistroActividades.Servicies
                     }
                     if (aviso)
                     {
-
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             DatosActualizados?.Invoke();
                         });
                     }
-                    var fechaMaxima = response.Max(x => x.FechaActualizacion) ?? DateTime.UtcNow;  
+                    var fechaMaxima = response.Max(x => x.FechaActualizacion) ?? DateTime.MinValue;  
 
-                    RegistroActividades.UserSettings.Default.UltimaFecha = fechaMaxima;
+                    UserSettings.Default.UltimaFecha = fechaMaxima;
+                    UserSettings.Default.Save();
                 }
 
 
