@@ -39,6 +39,7 @@ namespace RegistroActividades.Servicies
                 _token = token;
 
                 RegistroActividades.UserSettings.Default.Token = token;
+                UserSettings.Default.Save();
 
                 return token;
             }

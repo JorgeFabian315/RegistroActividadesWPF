@@ -12,8 +12,13 @@ namespace RegistroActividades.Servicies
 
         public DepartamentosService()
         {
-            _client = new HttpClient() { BaseAddress = new Uri(url) };
-            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+
+            var token = UserSettings.Default.Token;
+            _client = new HttpClient()
+            {
+                BaseAddress = new Uri(url),
+                DefaultRequestHeaders = { Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token) }
+            };
         }
 
         public async Task<List<DepartamentoDTO>> Get()
@@ -49,18 +54,20 @@ namespace RegistroActividades.Servicies
         }
 
 
-        public async Task<DepartamentoDTO> Post(DepartamentoCreateDTO departamento)
+        public async Task Post(DepartamentoCreateDTO departamento)
         {
-            var response = await _client.PostAsJsonAsync("departamento", departamento);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var departamentoCreado = await response.Content.ReadFromJsonAsync<DepartamentoDTO>();
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+                 await _client.PostAsJsonAsync("departamento", departamento);
 
-                return departamentoCreado;
             }
-            else
-                return null;
+            catch (Exception)
+            {
+                    Console.WriteLine("Error al guardar el departamento");
+            }
+
+         
 
         }
     }

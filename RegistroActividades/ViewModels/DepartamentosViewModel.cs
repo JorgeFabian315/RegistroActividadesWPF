@@ -14,7 +14,7 @@ namespace RegistroActividades.ViewModels
 
 
         [ObservableProperty]
-        private DepartamentoCreateDTO departamento;
+        private DepartamentoCreateDTO departamento = new();
 
         [ObservableProperty]
         private List<DepartamentoDTO> departamentos;
@@ -50,7 +50,7 @@ namespace RegistroActividades.ViewModels
         public async void GuardarDepartamento()
         {
 
-            var departamentoCreado = await departamentosService.Post(Departamento);
+            await departamentosService.Post(Departamento);
             GetDepartamentos();
             VistaDepartamento = VistaDepartamentos.Listado;
         }

@@ -27,7 +27,7 @@
         <ComboBox 
             ItemsSource="{Binding Departamentos}"
             DisplayMemberPath="Nombre"
-            SelectedValuePath="IdDepartamento"
+            SelectedValuePath="Id"
             SelectedValue="{Binding Departamento.IdSuperior}"
             />
 
