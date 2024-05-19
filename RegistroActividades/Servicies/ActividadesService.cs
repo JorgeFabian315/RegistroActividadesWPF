@@ -17,6 +17,7 @@ namespace RegistroActividades.Servicies
         private readonly HttpClient _client;
         private string? _token;
         private ActividadesRepository _actividadesRepository = new();
+        public event Action? DatosActualizados;
         public ActividadesService()
         {
             _client = new HttpClient() { BaseAddress = new Uri(url) };
@@ -43,7 +44,6 @@ namespace RegistroActividades.Servicies
                 return null;
 
         }
-        public event Action DatosActualizados;
 
         public async Task Get() 
         {
