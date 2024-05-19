@@ -83,7 +83,8 @@ namespace RegistroActividades.ViewModels
                         };
                         
                         UsuarioConectado = true;
-                        Sincronizador();
+                        Thread hilo = new Thread(Sincronizador) { IsBackground = true};
+                        hilo.Start();
                         CurrentViewModel = actividadesViewModel;
                     }
 
