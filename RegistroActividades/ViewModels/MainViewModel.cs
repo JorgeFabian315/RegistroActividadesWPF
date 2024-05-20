@@ -9,6 +9,7 @@ using RegistroDeActividades.Models.DTOS;
 using RegistroDeActividades.Models.Validator;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Windows;
 
 namespace RegistroActividades.ViewModels
 {
@@ -39,6 +40,8 @@ namespace RegistroActividades.ViewModels
         public static event Action? VerListadpActividades;
         public static event Action? VerListadDepartamentos;
 
+        public bool DetenerHilo { get; set; } = true;
+
         [ObservableProperty]
         private Usuario? usuario;
 
@@ -46,8 +49,6 @@ namespace RegistroActividades.ViewModels
 
         public MainViewModel()
         {
-            Username = "DirectorGeneralEquipo2@gmail.com";
-            Password = "12345678";
             UsuarioConectado = false;
             UserSettings.Default.UltimaFecha = DateTime.MinValue;
             UserSettings.Default.Save();
@@ -92,10 +93,14 @@ namespace RegistroActividades.ViewModels
 
                         App.IdUsuario = Usuario.Id;
 
-                        _repository.DeleteAll();
-                        var actividades = _repository.GetAll().ToList();
                         UsuarioConectado = true;
-                        LlamarSincronizador?.Invoke();
+                        _repository.DeleteAll();
+
+                        DetenerHilo = false;
+
+                        Thread hilo = new Thread(Sincronizador) { IsBackground = true };
+                        hilo.Start();
+                        
                         CurrentViewModel = actividadesViewModel;
                     }
 
@@ -132,7 +137,7 @@ namespace RegistroActividades.ViewModels
 
 
         [RelayCommand]
-        public async Task CerrarSesion()
+        public void CerrarSesion()
         {
             UsuarioConectado = false;
             CurrentViewModel = null;
@@ -141,7 +146,10 @@ namespace RegistroActividades.ViewModels
             LoginError = "";
             UserSettings.Default.Token = "";
             UserSettings.Default.Save();
+
              _repository.DeleteAll();
+
+            DetenerHilo = true;
 
             OnPropertyChanged();
 
@@ -149,7 +157,14 @@ namespace RegistroActividades.ViewModels
 
 
 
-
+        async void Sincronizador()
+        {
+            while (DetenerHilo == false)
+            {
+                await App.service.Get(); // _= Descartar la tarea 
+                Thread.Sleep(TimeSpan.FromMinutes(1));
+            }
+        }
 
 
 

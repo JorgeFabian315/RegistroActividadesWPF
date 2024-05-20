@@ -20,30 +20,30 @@ namespace RegistroActividades.Repositories
 
         public void Insert(Actividades actividad)
         {
-             context.Insert(actividad);
+            context.Insert(actividad);
         }
 
         public int Update(Actividades actividad)
         {
             return context.Update(actividad);
         }
-        public int  Delete(Actividades actividad)
+        public int Delete(Actividades actividad)
         {
-           return context.Delete(actividad);
+            return context.Delete(actividad);
         }
 
-        public  List<Actividades> GetAll()
+        public List<Actividades> GetAll()
         {
-            return  context.Table<Actividades>().OrderBy(x => x.Titulo).ThenBy(x => x.FechaActualizacion).ToList();
+            return context.Table<Actividades>().OrderBy(x => x.Titulo).ThenBy(x => x.FechaActualizacion).ToList();
         }
         public Actividades Get(int id)
         {
-            return  context.Find<Actividades>(id);
+            return context.Find<Actividades>(id);
         }
 
         public void DeleteAll()
         {
-           context.DeleteAll<Actividades>();
+            context.DeleteAll<Actividades>();
         }
 
 
