@@ -88,6 +88,8 @@ namespace RegistroActividades.ViewModels
                             Rol = roleClaim
                         };
                         
+                        App.IdUsuario = Usuario.Id;
+
                         _repository.DeleteAll();
 
                         UsuarioConectado = true;

@@ -22,11 +22,17 @@ namespace RegistroActividades.Views.Actividades
 
             if (openFileDialog.ShowDialog() == true)
             {
+                txtImagen.Text = openFileDialog.FileName;
                 imgActividad.Source = new BitmapImage(new Uri(openFileDialog.FileName));
             }
 
 
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            imgActividad.Source = null;
         }
     }
 }

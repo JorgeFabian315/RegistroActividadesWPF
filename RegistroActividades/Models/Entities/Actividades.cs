@@ -13,7 +13,7 @@ public partial class Actividades
     [NotNull]
     public string? Descripcion { get; set; }
     [NotNull]
-    public DateTime FechaRealizacion { get; set; } 
+    public string? FechaRealizacion { get; set; } 
     public int IdDepartamento { get; set; }
 
     public DateTime FechaCreacion { get; set; }
@@ -24,6 +24,9 @@ public partial class Actividades
     [NotNull]
     public string NombreDepartamento { get; set; } = string.Empty;
 
-    [Ignore]
-    public virtual Departamentos IdDepartamentoNavigation { get; set; } = null!;
+    //[Ignore]
+    //public virtual Departamentos IdDepartamentoNavigation { get; set; } = null!;
+
+    public string? Imagen { get; set; }
+
 }

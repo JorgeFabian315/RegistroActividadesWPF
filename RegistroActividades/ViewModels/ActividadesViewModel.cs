@@ -5,6 +5,7 @@ using RegistroActividades.Servicies;
 using RegistroActividades.Views;
 using RegistroDeActividades.Models.DTOS;
 using RegistroDeActividades.Models.Entities;
+using RegistroDeActividades.Models.Validator;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,15 +32,21 @@ namespace RegistroActividades.ViewModels
         private readonly ActividadesService _actividadesService = new();
 
         [ObservableProperty]
-        private string loginError;
+        private string error;
 
-        private ActividadesRepository _repository = new();
+
+        [ObservableProperty]
+        private int idUsuario;
+
+        private ActividadesRepository _actividadRepositorio = new();
+        private DepartamentosRepository _departamentosRepositorio = new();
 
         public ActividadesViewModel()
         {
             VistaActividad = VistaActividades.Listado;
-            LoginError = string.Empty;
             Actividad = new ActividadDTO();
+            Error = "";
+            IdUsuario = App.IdUsuario;
             MainViewModel.VerPerfilView += App_VerPerfilView;
             MainViewModel.VerListadpActividades += MainViewModel_VerListadpActividades;
             ActualizarActividades();
@@ -66,6 +73,7 @@ namespace RegistroActividades.ViewModels
         [RelayCommand]
         public void VistaAgregarActividad()
         {
+            Actividad = new ActividadDTO();
             VistaActividad = VistaActividades.Agregar;
         }
 
@@ -75,10 +83,35 @@ namespace RegistroActividades.ViewModels
             VistaActividad = VistaActividades.Listado;
         }
 
+
+        [RelayCommand]
+        public async Task AgregarActividad()
+        {
+            ActividadDTOValidator validator = new(_departamentosRepositorio.GetAll());
+            var results = validator.Validate(Actividad);
+
+            if (!results.IsValid)
+            {
+                Error = results.Errors.Select(x => x.ErrorMessage).Aggregate((a, b) => a + Environment.NewLine + b);
+            }
+            else
+            {
+                Actividad.Estado = 1;
+
+                var imagencodificada = System.IO.File.ReadAllBytes(Actividad.Imagen ?? "");
+                Actividad.Imagen = Convert.ToBase64String(imagencodificada); // CODIFICAMOS LA FOTO
+
+                Actividad.FechaRealizacion = DateOnly.FromDateTime(Actividad.FechaRealizacion2.Value);
+
+                await App.service.Post(Actividad);
+                ActualizarActividades();
+                Cancelar();
+            }
+        }
         public void ActualizarActividades()
         {
             Actividades.Clear();
-            var actividadesBD = _repository.GetAll().OrderBy(x => x.FechaActualizacion);
+            var actividadesBD = _actividadRepositorio.GetAll().OrderBy(x => x.FechaActualizacion);
 
             foreach (var a in actividadesBD)
             {

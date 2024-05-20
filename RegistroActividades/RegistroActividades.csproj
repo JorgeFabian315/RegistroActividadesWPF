@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Assets\Fonts\Montserrat-Regular.ttf" />
     <None Remove="Assets\Imagenes\facebook.png" />
+    <None Remove="Assets\Imagenes\fondo.jpg" />
     <None Remove="Assets\Imagenes\google.png" />
     <None Remove="Assets\Imagenes\imagen1.jpeg" />
     <None Remove="Assets\Imagenes\imagen2.jpeg" />
@@ -19,7 +20,6 @@
     <None Remove="Assets\Imagenes\tec_fondo.jpg" />
     <None Remove="Assets\Imagenes\tec_logo.jpg" />
     <None Remove="Assets\Imagenes\tec_logo2.jpg" />
-    <None Remove="Assets\Imagenes\user.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +36,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Imagenes\facebook.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Imagenes\fondo.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Imagenes\google.png">
@@ -60,9 +63,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Imagenes\tec_logo2.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\Imagenes\user.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

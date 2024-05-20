@@ -10,13 +10,15 @@ namespace RegistroActividades
 
     {
         public static ActividadesService service = new();
-        public App()
+
+        public static int IdUsuario = 0;
+         public App()
         {
 
         }
-       
 
-     
+
+
 
     }
 }

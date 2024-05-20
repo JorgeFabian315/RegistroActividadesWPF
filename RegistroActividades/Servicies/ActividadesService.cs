@@ -14,7 +14,8 @@ namespace RegistroActividades.Servicies
     public class ActividadesService
     {
 
-        private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
+        //private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
+        private readonly string url = "https://localhost:7051/api/";
         private readonly HttpClient _client;
         private string? _token;
         private ActividadesRepository _actividadesRepository = new();
@@ -73,10 +74,11 @@ namespace RegistroActividades.Servicies
                                 Descripcion = actividad.Descripcion,
                                 FechaActualizacion = actividad.FechaActualizacion ?? DateTime.UtcNow,
                                 FechaCreacion = actividad.FechaCreacion ?? DateTime.UtcNow,
-                                FechaRealizacion = actividad.FechaRealizacion ?? DateTime.UtcNow,
+                                FechaRealizacion = actividad.FechaRealizacion.ToString() ?? DateTime.UtcNow.ToString(),
                                 IdDepartamento = actividad.DepartamentoId,
                                 Estado = actividad.Estado,
-                                NombreDepartamento = actividad.Departamento ?? string.Empty
+                                NombreDepartamento = actividad.Departamento ?? string.Empty,
+                                Imagen = actividad.Imagen ?? string.Empty
                             };
 
                             _actividadesRepository.Insert(entidad);
@@ -130,7 +132,23 @@ namespace RegistroActividades.Servicies
 
 
 
+        public async Task Post(ActividadDTO actividad)
+        {
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+                var response = await _client.PostAsJsonAsync("actividad", actividad);
+                
+                response.EnsureSuccessStatusCode();
 
+                if (response.IsSuccessStatusCode)
+                    await Get();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }   
 
 
 
