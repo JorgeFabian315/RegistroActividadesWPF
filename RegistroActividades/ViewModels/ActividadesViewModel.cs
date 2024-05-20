@@ -25,6 +25,7 @@ namespace RegistroActividades.ViewModels
     {
 
         public ObservableCollection<Actividades> Actividades { get; set; } = new();
+        
         public ObservableCollection<Actividades> MisActividades { get; set; } = new();
         public ObservableCollection<Actividades> Borradores { get; set; } = new();
 
@@ -130,8 +131,10 @@ namespace RegistroActividades.ViewModels
                 .Where(x => x.Estado == (int)Estados.Activa)
                 .OrderBy(x => x.FechaActualizacion);
 
-
             var actividades = _actividadRepositorio.GetAll().ToList();
+
+
+
 
             foreach (var a in actividadesBD)
             {

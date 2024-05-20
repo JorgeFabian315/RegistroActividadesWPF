@@ -44,6 +44,7 @@ namespace RegistroActividades.ViewModels
         [RelayCommand]
         public void VerAgregarDepartamento()
         {
+            Departamento = new();
             VistaDepartamento = VistaDepartamentos.Agregar;
         }
 
