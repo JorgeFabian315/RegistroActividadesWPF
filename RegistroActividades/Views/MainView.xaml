@@ -11,9 +11,9 @@
         Title="MainView"
         WindowStartupLocation="CenterScreen"
         Height="800"
-        MinHeight="800"
+        MinHeight="850"
         MinWidth="1200"
-        Width="800">
+        Width="850">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
@@ -130,7 +130,7 @@
                                            HorizontalAlignment="Right"
                                            TextTrimming="CharacterEllipsis"
                                            Style="{StaticResource FontFamily}" />
-                                <TextBlock Text="Ver Perfil"
+                                <!--<TextBlock Text="Ver Perfil"
                                            HorizontalAlignment="Right"
                                            FontSize="12"
                                            Cursor="Hand"
@@ -139,7 +139,7 @@
                                         <MouseBinding Gesture="LeftClick"
                                                       Command="{Binding VerMisActividadesCommand}"/>
                                     </TextBlock.InputBindings>
-                                </TextBlock>
+                                </TextBlock>-->
                             </StackPanel>
                             <Border CornerRadius="50"
                                     Padding="10"

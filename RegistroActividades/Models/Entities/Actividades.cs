@@ -13,7 +13,7 @@ public partial class Actividades
     [NotNull]
     public string? Descripcion { get; set; }
     [NotNull]
-    public string? FechaRealizacion { get; set; } 
+    public DateTime? FechaRealizacion { get; set; } 
     public int IdDepartamento { get; set; }
 
     public DateTime FechaCreacion { get; set; }

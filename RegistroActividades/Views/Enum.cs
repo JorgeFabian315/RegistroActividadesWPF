@@ -10,6 +10,8 @@
         Listado,
         Agregar,
         VerMisActividades,
+        EliminarActividad,
+        EditarActividad
     }
 
     public enum VistaDepartamentos

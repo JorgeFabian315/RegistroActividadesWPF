@@ -24,10 +24,18 @@ namespace RegistroActividades.ViewModels
         [ObservableProperty]
         private VistaDepartamentos vistaDepartamento;
 
+
         public DepartamentosViewModel()
         {
             VistaDepartamento = VistaDepartamentos.Listado;
+            MainViewModel.VerListadDepartamentos += MainViewModel_VerListadDepartamentos; ;
+            
             GetDepartamentos();
+        }
+
+        private void MainViewModel_VerListadDepartamentos()
+        {
+             VistaDepartamento = VistaDepartamentos.Listado;
         }
 
         public async void GetDepartamentos()

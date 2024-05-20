@@ -74,7 +74,7 @@ namespace RegistroActividades.Servicies
                                 Descripcion = actividad.Descripcion,
                                 FechaActualizacion = actividad.FechaActualizacion ?? DateTime.UtcNow,
                                 FechaCreacion = actividad.FechaCreacion ?? DateTime.UtcNow,
-                                FechaRealizacion = actividad.FechaRealizacion.ToString() ?? DateTime.UtcNow.ToString(),
+                                FechaRealizacion = actividad.FechaRealizacion.Value.ToDateTime(new TimeOnly(0,0)),
                                 IdDepartamento = actividad.DepartamentoId,
                                 Estado = actividad.Estado,
                                 NombreDepartamento = actividad.Departamento ?? string.Empty,
@@ -150,6 +150,24 @@ namespace RegistroActividades.Servicies
             }
         }   
 
+
+        public async Task Delete(int id)
+        {
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+                var response = await _client.DeleteAsync($"actividad/{id}");
+
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                    await Get();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
 
 
 
