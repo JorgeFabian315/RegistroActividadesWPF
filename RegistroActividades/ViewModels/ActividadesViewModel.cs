@@ -4,6 +4,7 @@ using Microsoft.VisualBasic;
 using RegistroActividades.Repositories;
 using RegistroActividades.Servicies;
 using RegistroActividades.Views;
+using RegistroActividades.Views.Actividades;
 using RegistroDeActividades.Enums;
 using RegistroDeActividades.Models.DTOS;
 using RegistroDeActividades.Models.Entities;
@@ -25,7 +26,8 @@ namespace RegistroActividades.ViewModels
     {
 
         public ObservableCollection<Actividades> Actividades { get; set; } = new();
-        
+        public ObservableCollection<string> DepartamentosSubordinados { get; set; } = new();
+
         public ObservableCollection<Actividades> MisActividades { get; set; } = new();
         public ObservableCollection<Actividades> Borradores { get; set; } = new();
 
@@ -60,8 +62,16 @@ namespace RegistroActividades.ViewModels
             ActualizarActividades();
             App.service.DatosActualizados += Service_DatosActualizados;
 
+            ListaActividadesView.FiltrarActividadesEvent += ListaActividadesView_FiltrarActividadesEvent1; ; ;
+
         }
 
+        private void ListaActividadesView_FiltrarActividadesEvent1(string obj)
+        {
+           FiltrarDepartamentos(obj);   
+        }
+
+      
         private void Service_DatosActualizados()
         {
             ActualizarActividades();
@@ -129,12 +139,60 @@ namespace RegistroActividades.ViewModels
             var actividadesBD = _actividadRepositorio
                 .GetAll()
                 .Where(x => x.Estado == (int)Estados.Activa)
-                .OrderBy(x => x.FechaActualizacion);
+                .OrderByDescending(x => x.FechaActualizacion);
+
+
+            var actividades = _actividadRepositorio.GetAll().ToList();
+
+            foreach (var a in actividadesBD)
+            {
+                Actividades.Add(a);
+            }
+
+
+            IEnumerable<string>? departamentos = Actividades
+                  .GroupBy(x => x.NombreDepartamento)
+                  .Select(x => x.Key).ToList();
+
+            DepartamentosSubordinados.Clear();
+            DepartamentosSubordinados.Add("Todos los departamentos");
+
+            foreach (var d in departamentos)
+            {
+                DepartamentosSubordinados.Add(d);
+            }
+        }
+
+        public void FiltrarDepartamentos(string departamento)
+        {
+            Actividades.Clear();
+
+            if(departamento == "Todos los departamentos")
+            {
+                Actividades.Clear();
+
+                var actividadesBD2 = _actividadRepositorio
+                    .GetAll()
+                    .Where(x => x.Estado == (int)Estados.Activa)
+                    .OrderByDescending(x => x.FechaActualizacion);
 
             var actividades = _actividadRepositorio.GetAll().ToList();
 
 
 
+
+                foreach (var a in actividadesBD2)
+                {
+                    Actividades.Add(a);
+                }
+                return;
+            }
+
+            var actividadesBD = _actividadRepositorio
+                .GetAll()
+                .Where(x => x.Estado == (int)Estados.Activa)
+                .Where(x => x.NombreDepartamento == departamento)
+                .OrderByDescending(x => x.FechaActualizacion);
 
             foreach (var a in actividadesBD)
             {

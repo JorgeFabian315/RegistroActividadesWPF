@@ -167,7 +167,7 @@ namespace RegistroActividades.ViewModels
             while (DetenerHilo == false)
             {
                 await App.service.Get(); // _= Descartar la tarea 
-                Thread.Sleep(TimeSpan.FromMinutes(1));
+                Thread.Sleep(TimeSpan.FromMinutes(2));
             }
         }
 
