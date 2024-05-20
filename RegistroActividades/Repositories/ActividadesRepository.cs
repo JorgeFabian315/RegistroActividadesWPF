@@ -23,13 +23,13 @@ namespace RegistroActividades.Repositories
              context.Insert(actividad);
         }
 
-        public void Update(Actividades actividad)
+        public int Update(Actividades actividad)
         {
-             context.Update(actividad);
+            return context.Update(actividad);
         }
-        public void  Delete(Actividades actividad)
+        public int  Delete(Actividades actividad)
         {
-            context.Delete(actividad);
+           return context.Delete(actividad);
         }
 
         public  List<Actividades> GetAll()

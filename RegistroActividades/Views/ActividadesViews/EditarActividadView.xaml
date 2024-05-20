@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RegistroActividades.Views.ActividadesViews"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:hp="clr-namespace:RegistroActividades.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1200">
+    <UserControl.Resources>
+        <hp:ConvertToImagen x:Key="convertidor" />
+    </UserControl.Resources>
     <Border Background="#fff"
             Grid.ColumnSpan="2"
             VerticalAlignment="Center"
@@ -178,7 +182,7 @@
                     <Image Height="300"
                            Name="imgActividad"
                            Width="300"
-                           Source="/Assets/Imagenes/fondo.jpg"
+                           Source="{Binding Actividad.Imagen, Converter={StaticResource convertidor}}"
                            Stretch="Fill" />
                     <TextBox Text="{Binding Actividad.ImagenDecodificada, UpdateSourceTrigger=PropertyChanged}"
                              Visibility="Collapsed"

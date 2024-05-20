@@ -46,7 +46,7 @@
                                     Stretch="Fill" />
                     </Border.Background>
                 </Border>
-                <TextBlock Text="{Binding Estado}"
+                <TextBlock Text="{Binding Descripcion}"
                            FontSize="15"
                            TextAlignment="Left"
                            Height="40"
@@ -93,16 +93,42 @@
         <Border Background="{StaticResource Primario}"
                 Grid.Column="1"
                 VerticalAlignment="Center"
-                Height="300"
+                Height="350"
                 CornerRadius="0,10,10,0">
+            <Border.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
+                    <Setter Property="Background"
+                            Value="{StaticResource grisClaro}" />
+                    <Setter Property="BorderBrush"
+                            Value="{StaticResource grisClaro}" />
+                    <Setter Property="Height"
+                            Value="40" />
+                    <Setter Property="Margin"
+                            Value="0,5,5,0" />
+                    <Setter Property="Padding"
+                            Value="10" />
+                </Style>
+            </Border.Resources>
+            
             <StackPanel VerticalAlignment="Center">
                 <Button CommandParameter="{Binding .}"
                         Command="{Binding DataContext.VerEliminarCommand, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
-                    <material:PackIcon Kind="Trash" />
+                    <material:PackIcon Kind="Trash" Foreground="{StaticResource Primario}"
+                                       Height="25"
+                                       Width="25"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       
+                                       />
                 </Button>
                 <Button CommandParameter="{Binding .}"
                         Command="{Binding DataContext.VerEditarCommand, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
-                    <material:PackIcon Kind="Edit" />
+                    <material:PackIcon Kind="Edit"
+                                       Foreground="{StaticResource Primario}"
+                                       Height="25"
+                                       Width="25"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" />
                 </Button>
             </StackPanel>
         </Border>

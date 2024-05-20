@@ -55,7 +55,7 @@ namespace RegistroActividades.ViewModels
             Error = "";
             IdUsuario = App.IdUsuario;
             MainViewModel.VerListadpActividades += MainViewModel_VerListadpActividades;
-            //ActualizarActividades();
+            ActualizarActividades();
             App.service.DatosActualizados += Service_DatosActualizados;
 
         }
@@ -72,7 +72,7 @@ namespace RegistroActividades.ViewModels
         }
 
         [RelayCommand]
-        private async Task VerPerfil()
+        private void VerPerfil()
         {
             IdUsuario = App.IdUsuario;
             VerMisActividades();
@@ -124,7 +124,10 @@ namespace RegistroActividades.ViewModels
         {
             Actividades.Clear();
 
-            var actividadesBD = _actividadRepositorio.GetAll();
+            var actividadesBD = _actividadRepositorio
+                .GetAll()
+                .Where(x => x.Estado == (int)Estados.Activa)
+                .OrderBy(x => x.FechaActualizacion);
 
             foreach (var a in actividadesBD)
             {

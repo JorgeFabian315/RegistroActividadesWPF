@@ -63,9 +63,11 @@ namespace RegistroActividades.Servicies
                 {
                     foreach (var actividad in response)
                     {
-                        var entidad = _actividadesRepository.Get(actividad.Id ?? 0);
 
-                        if (entidad == null && entidad?.Estado != (int)Estados.Eliminada)
+                          var  entidad = _actividadesRepository.Get(actividad.Id ?? 0);
+                        
+                        
+                        if (entidad == null && actividad?.Estado != (int)Estados.Eliminada)
                         {
                             entidad = new Actividades()
                             {
@@ -86,16 +88,31 @@ namespace RegistroActividades.Servicies
                         }
                         else
                         {
-                            if (entidad.Estado == (int)Estados.Eliminada)
+                            entidad = new Actividades()
                             {
-                                _actividadesRepository.Delete(entidad);
+                                Id = actividad.Id ?? 0,
+                                Titulo = actividad.Titulo,
+                                Descripcion = actividad.Descripcion,
+                                FechaActualizacion = actividad.FechaActualizacion ?? DateTime.UtcNow,
+                                FechaCreacion = actividad.FechaCreacion ?? DateTime.UtcNow,
+                                FechaRealizacion = actividad.FechaRealizacion.Value.ToDateTime(new TimeOnly(0, 0)),
+                                IdDepartamento = actividad.DepartamentoId,
+                                Estado = actividad.Estado,
+                                NombreDepartamento = actividad.Departamento ?? string.Empty,
+                                Imagen = actividad.Imagen ?? string.Empty
+                            };
+
+                            if (actividad.Estado == (int)Estados.Eliminada)
+                            {
+                               var eliminado = _actividadesRepository.Delete(entidad);
                                 aviso = true;
                             }
                             else
                             {
                                 if (!actividad.Equals(entidad))
                                 {
-                                    _actividadesRepository.Update(entidad);
+
+                                    var r = _actividadesRepository.Update(entidad);
                                     aviso = true;
                                 }
                             }

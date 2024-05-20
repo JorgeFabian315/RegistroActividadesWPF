@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:RegistroActividades.Views.ActividadesViews"
              xmlns:actividades="clr-namespace:RegistroActividades.Views.Actividades"
+             xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
@@ -15,11 +16,17 @@
         </Grid.RowDefinitions>
         <Button
             Command="{Binding CancelarCommand}"
-            Content="regresar"
+            Style="{StaticResource BotonCancelar}"
             VerticalAlignment="Top"
+            Width="50"
             HorizontalAlignment="Left"
             Margin="10">
-            
+            <material:PackIcon Kind="ArrowLeft"
+                               Foreground="{StaticResource Primario}"
+                               Height="25"
+                               Width="25"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
         </Button>
             <TextBlock Text="Mis Actividades"
                        Style="{StaticResource FontFamily}"

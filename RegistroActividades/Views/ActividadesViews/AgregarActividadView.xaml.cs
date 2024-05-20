@@ -18,7 +18,7 @@ namespace RegistroActividades.Views.Actividades
         private void btnAgregarImagen_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files |*.jpg;";
+            openFileDialog.Filter = "Image files |*.jpg;*.jpeg;";
 
             if (openFileDialog.ShowDialog() == true)
             {
