@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RegistroActividades.Views"
-             xmlns:dapaView="clr-namespace:RegistroActividades.Views.Departamentos"
+             xmlns:dapaView="clr-namespace:RegistroActividades.Views.DepartamentosViews"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ContentControl Grid.Column="1"
@@ -13,6 +13,10 @@
         <ContentControl.Resources>
             <dapaView:ListaDepartamentosView x:Key="ListaDepartamentos"/>
             <dapaView:AgregarDepartamentoView x:Key="agregarDepartamaento"/>
+            <dapaView:EditarDepartamentoView x:Key="editarDepartamento"/>
+            <dapaView:EliminarDepartamentoView x:Key="eliminarDepartamento"/>
+
+
             <Style TargetType="ContentControl">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding VistaDepartamento}"
@@ -24,6 +28,16 @@
                                  Value="{x:Static local:VistaDepartamentos.Agregar}">
                         <Setter Property="Content"
                                 Value="{StaticResource agregarDepartamaento}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding VistaDepartamento}"
+                               Value="{x:Static local:VistaDepartamentos.Editar}">
+                                        <Setter Property="Content"
+                              Value="{StaticResource editarDepartamento}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding VistaDepartamento}"
+                           Value="{x:Static local:VistaDepartamentos.Eliminar}">
+                                    <Setter Property="Content"
+                          Value="{StaticResource eliminarDepartamento}" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>

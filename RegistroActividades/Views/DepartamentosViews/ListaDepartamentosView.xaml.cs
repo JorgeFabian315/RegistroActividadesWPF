@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace RegistroActividades.Views.Departamentos
+namespace RegistroActividades.Views.DepartamentosViews
 {
     /// <summary>
     /// Lógica de interacción para ListaDepartamentosView.xaml

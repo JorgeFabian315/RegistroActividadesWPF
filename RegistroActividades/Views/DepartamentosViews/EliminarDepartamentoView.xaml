@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="RegistroActividades.Views.DepartamentosViews.EliminarDepartamentoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RegistroActividades.Views.DepartamentosViews" xmlns:viewmodels="clr-namespace:RegistroActividades.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:DepartamentosViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Margin="20">
+        <TextBlock Margin="10" FontSize="24" FontWeight="Bold">
+            Eliminar Departamento
+        </TextBlock>
+
+        <TextBlock Margin="10" FontSize="20">
+            ¿Está seguro de eliminar el departamento? <Run FontWeight="Bold" TextDecorations="Underline" Text="{Binding Departamento.Nombre}"></Run>
+        </TextBlock>
+
+        <WrapPanel Margin="10" HorizontalAlignment="Right">
+            <Button Background="red" Foreground="#fff" Margin="0,0,10,0" Command="{Binding EliminarDepartamentoCommand}">
+                Eliminar
+            </Button>
+            <Button Background="Blue" Foreground="#fff" Command="{Binding CancelarCommand}">
+                Cancelar
+            </Button>
+           
+        </WrapPanel>
+        
+    </StackPanel>
+</UserControl>

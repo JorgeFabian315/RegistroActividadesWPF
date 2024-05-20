@@ -46,6 +46,59 @@ namespace RegistroActividades.ViewModels
         }
 
         [RelayCommand]
+        public void VerEditarDepartamento(DepartamentoDTO departamento)
+        {
+            Departamento = new DepartamentoCreateDTO
+            {
+                Id = departamento.Id,
+                Nombre = departamento.Nombre,
+                Username = departamento.Username,
+                IdSuperior = (int)departamento.IdSuperior
+                
+                
+            };
+            VistaDepartamento = VistaDepartamentos.Editar;
+        }
+
+
+        [RelayCommand]
+        public void VerEliminarDepartamento(DepartamentoDTO departamento)
+        {
+            Departamento = new DepartamentoCreateDTO
+            {
+                Id = departamento.Id,
+                Nombre = departamento.Nombre,
+                Username = departamento.Username,
+                IdSuperior = (int)departamento.IdSuperior
+            };
+            VistaDepartamento = VistaDepartamentos.Eliminar;
+        }
+
+        [RelayCommand]
+        public async void EliminarDepartamento()
+        {
+            await departamentosService.Delete(Departamento.Id);
+            GetDepartamentos();
+            VistaDepartamento = VistaDepartamentos.Listado;
+        }
+
+        [RelayCommand]
+        public async void EditarDepartamento()
+        {
+            await departamentosService.Put(Departamento);
+            GetDepartamentos();
+            VistaDepartamento = VistaDepartamentos.Listado;
+        }
+
+        [RelayCommand]
+        public void Cancelar ()
+        {
+            VistaDepartamento = VistaDepartamentos.Listado;
+        }
+
+
+
+        [RelayCommand]
         public async void GuardarDepartamento()
         {
 

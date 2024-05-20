@@ -16,6 +16,8 @@
     {
         Listado,
         Agregar,
+        Editar,
+        Eliminar
     }
 
 }

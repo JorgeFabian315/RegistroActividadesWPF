@@ -14,8 +14,8 @@ namespace RegistroActividades.Servicies
     public class ActividadesService
     {
 
-        //private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
-        private readonly string url = "https://localhost:7051/api/";
+        private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
+        //private readonly string url = "https://localhost:7051/api/";
         private readonly HttpClient _client;
         private string? _token;
         private ActividadesRepository _actividadesRepository = new();

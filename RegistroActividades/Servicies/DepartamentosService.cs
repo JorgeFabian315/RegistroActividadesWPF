@@ -8,8 +8,8 @@ namespace RegistroActividades.Servicies
     public class DepartamentosService
     {
 
-        //private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
-        private readonly string url = "https://localhost:7051/api/";
+        private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
+        //private readonly string url = "https://localhost:7051/api/";
 
         private readonly HttpClient _client;
 
@@ -69,9 +69,34 @@ namespace RegistroActividades.Servicies
             {
                     Console.WriteLine("Error al guardar el departamento");
             }
+        }
 
-         
+        public async Task Put(DepartamentoCreateDTO departamento)
+        {
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+                var response = await _client.PutAsJsonAsync("departamento", departamento);
 
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error al actualizar el departamento");
+            }
+        }
+
+        public async Task Delete(int id)
+        {
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+                var response = await _client.DeleteAsync($"departamento/{id}");
+
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error al eliminar el departamento");
+            }
         }
     }
 }

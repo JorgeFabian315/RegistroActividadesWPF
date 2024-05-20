@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="RegistroActividades.Views.Departamentos.DepartamentoTemplate"
+﻿<UserControl x:Class="RegistroActividades.Views.DepartamentosViews.DepartamentoTemplate"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RegistroActividades.Views.Departamentos" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:RegistroActividades.Views.DepartamentosViews" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:RegistroActividades.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:DepartamentosViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border Background="{StaticResource Primario}"
@@ -11,42 +11,47 @@
         Padding="20,0"
         Height="50">
         <Grid  VerticalAlignment="Center" >
+
+            <Grid.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IdSuperior}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Hidden"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".9*"></ColumnDefinition>
-                <ColumnDefinition Width=".1*"></ColumnDefinition>
+                <ColumnDefinition Width=".8*"></ColumnDefinition>
+                <ColumnDefinition Width=".2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock FontSize="20" TextAlignment="Left"
                        VerticalAlignment="Center" FontWeight="Medium"
                        Foreground="#fff" Margin="0,0,12,0"
                         Grid.ColumnSpan="6"
                        Text="{Binding Nombre}" />
-            <WrapPanel Grid.ColumnSpan="2" Grid.Column="2">
-                <Border CornerRadius="25"
-                       Width="30"
-                       Height="30"
-                       Padding="5"
-                       Background="{StaticResource Ligero}">
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Column="2">
+                <Button Margin="0,0,20,0" Command="{Binding ElementName=userControl, Path=DataContext.VerEliminarDepartamentoCommand}" CommandParameter="{Binding .}">
+                        <materialDesign:PackIcon VerticalAlignment="Center"
+                            Height="20"
+                            Width="20"
+                            HorizontalAlignment="Center"
+                            Foreground="#fff"
+                            Kind="Delete"
+                                 
+/>
+                    </Button>
+
+                <Button Command="{Binding ElementName=userControl, Path=DataContext.VerEditarDepartamentoCommand}" CommandParameter="{Binding .}">
                     <materialDesign:PackIcon VerticalAlignment="Center"
-                        Height="20"
-                        Width="20"
-                        HorizontalAlignment="Center"
-                        Foreground="#fff"
-                        Kind="Delete" />
-                </Border>
-                <Border CornerRadius="25"
-                    Margin="10,0,0,0"
-                    Width="30"
-                    Height="30"
-                    Padding="5"
-                    Background="{StaticResource Ligero}">
-                    <materialDesign:PackIcon VerticalAlignment="Center"
-                     Height="20"
-                     Width="20"
-                     HorizontalAlignment="Center"
-                     Foreground="#fff"
-                     Kind="Edit" />
-                </Border>
-            </WrapPanel>
+                      Height="20"
+                      Width="20"
+                      HorizontalAlignment="Center"
+                      Foreground="#fff"
+                      Kind="Edit" />
+                </Button>
+            </StackPanel>
         </Grid>
 
     </Border>
