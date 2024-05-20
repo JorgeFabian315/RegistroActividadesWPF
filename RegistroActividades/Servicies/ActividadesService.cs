@@ -55,6 +55,7 @@ namespace RegistroActividades.Servicies
 
         }
 
+        public static event  Action? DeslogearEvent;
         public async Task Get()
         {
             try
@@ -139,15 +140,12 @@ namespace RegistroActividades.Servicies
                     UserSettings.Default.UltimaFecha = fechaMaxima;
                     UserSettings.Default.Save();
                 }
-
-
-
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
+
+                DeslogearEvent?.Invoke();
             }
 
 
