@@ -17,6 +17,7 @@
             <actividadesviews:MisActividadesView x:Key="MisActividades" />
             <actividadesviews:EditarActividadView x:Key="editar" />
             <actividadesviews:EliminarActividadView x:Key="eliminar" />
+            <actividadesviews:BorradoresView x:Key="borradores" />
             <Style TargetType="ContentControl">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding VistaActividad}"
@@ -43,6 +44,11 @@
                                  Value="{x:Static local:VistaActividades.EliminarActividad}">
                         <Setter Property="Content"
                                 Value="{StaticResource eliminar}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding VistaActividad}"
+                                 Value="{x:Static local:VistaActividades.Borradores}">
+                        <Setter Property="Content"
+                                Value="{StaticResource borradores}" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>

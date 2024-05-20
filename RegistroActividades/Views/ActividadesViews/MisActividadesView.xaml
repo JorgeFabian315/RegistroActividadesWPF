@@ -28,7 +28,24 @@
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"/>
         </Button>
-            <TextBlock Text="Mis Actividades"
+        <Button Command="{Binding VerBorradoresCommand}"
+                Style="{StaticResource BotonCancelar}"
+                VerticalAlignment="Top"
+                Width="50"
+                HorizontalAlignment="Right"
+                Margin="10">
+            <Button.ToolTip>
+                <TextBlock Text="Borradores" />
+            </Button.ToolTip>
+            
+            <material:PackIcon Kind="ContentSave"
+                               Foreground="{StaticResource Primario}"
+                               Height="25"
+                               Width="25"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center" />
+        </Button>
+        <TextBlock Text="Mis Actividades"
                        Style="{StaticResource FontFamily}"
                        FontSize="30"
                        HorizontalAlignment="Center"

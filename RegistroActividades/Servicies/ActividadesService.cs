@@ -14,8 +14,8 @@ namespace RegistroActividades.Servicies
     public class ActividadesService
     {
 
-        private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
-        //private readonly string url = "https://localhost:7051/api/";
+        //private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
+        private readonly string url = "https://localhost:7051/api/";
         private readonly HttpClient _client;
         private string? _token;
         private ActividadesRepository _actividadesRepository = new();
@@ -76,7 +76,7 @@ namespace RegistroActividades.Servicies
                                 Descripcion = actividad.Descripcion,
                                 FechaActualizacion = actividad.FechaActualizacion ?? DateTime.UtcNow,
                                 FechaCreacion = actividad.FechaCreacion ?? DateTime.UtcNow,
-                                FechaRealizacion = actividad.FechaRealizacion.Value.ToDateTime(new TimeOnly(0, 0)),
+                                FechaRealizacion = actividad.FechaRealizacion,
                                 IdDepartamento = actividad.DepartamentoId,
                                 Estado = actividad.Estado,
                                 NombreDepartamento = actividad.Departamento ?? string.Empty,
@@ -95,7 +95,7 @@ namespace RegistroActividades.Servicies
                                 Descripcion = actividad.Descripcion,
                                 FechaActualizacion = actividad.FechaActualizacion ?? DateTime.UtcNow,
                                 FechaCreacion = actividad.FechaCreacion ?? DateTime.UtcNow,
-                                FechaRealizacion = actividad.FechaRealizacion.Value.ToDateTime(new TimeOnly(0, 0)),
+                                FechaRealizacion = actividad.FechaRealizacion,
                                 IdDepartamento = actividad.DepartamentoId,
                                 Estado = actividad.Estado,
                                 NombreDepartamento = actividad.Departamento ?? string.Empty,
@@ -193,6 +193,25 @@ namespace RegistroActividades.Servicies
             {
                 _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
                 var response = await _client.PutAsJsonAsync("actividad", actividad);
+
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                    await Get();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+
+        public async Task PostBorrador(ActividadDTO actividad)
+        {
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+                var response = await _client.PostAsJsonAsync("actividad/borrador", actividad);
 
                 response.EnsureSuccessStatusCode();
 

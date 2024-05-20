@@ -11,7 +11,6 @@
              d:DesignHeight="700"
              Background="#fff"
              d:DesignWidth="1080">
-    <UserControl.Resources></UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".1*" />

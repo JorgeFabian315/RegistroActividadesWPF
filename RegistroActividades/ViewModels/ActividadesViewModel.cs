@@ -26,6 +26,7 @@ namespace RegistroActividades.ViewModels
 
         public ObservableCollection<Actividades> Actividades { get; set; } = new();
         public ObservableCollection<Actividades> MisActividades { get; set; } = new();
+        public ObservableCollection<Actividades> Borradores { get; set; } = new();
 
         [ObservableProperty]
         private VistaInicio vistaInicio;
@@ -113,7 +114,7 @@ namespace RegistroActividades.ViewModels
                     Actividad.Imagen = Convert.ToBase64String(imagencodificada); // CODIFICAMOS LA FOTO
                 }
 
-                Actividad.FechaRealizacion = DateOnly.FromDateTime(Actividad.FechaRealizacion2.Value);
+                //Actividad.FechaRealizacion = DateOnly.FromDateTime(Actividad.FechaRealizacion2.Value);
 
                 await App.service.Post(Actividad);
                 ActualizarActividades();
@@ -138,7 +139,7 @@ namespace RegistroActividades.ViewModels
         public void VerMisActividades()
         {
             MisActividades.Clear();
-            var actividadesBD = _actividadRepositorio.GetAll();
+            var actividadesBD = _actividadRepositorio.GetAll().Where(x => x.Estado == (int)Estados.Activa);
 
             foreach (var a in actividadesBD)
             {
@@ -160,7 +161,7 @@ namespace RegistroActividades.ViewModels
                 DepartamentoId = a.IdDepartamento,
                 FechaCreacion = a.FechaCreacion,
                 Imagen = a.Imagen,
-                FechaRealizacion2 = a.FechaRealizacion,
+                FechaRealizacion = a.FechaRealizacion,
                 Titulo = a.Titulo,
             };
 
@@ -193,7 +194,7 @@ namespace RegistroActividades.ViewModels
                 DepartamentoId = a.IdDepartamento,
                 FechaCreacion = a.FechaCreacion,
                 Imagen = a.Imagen,
-                FechaRealizacion2 = a.FechaRealizacion,
+                FechaRealizacion = a.FechaRealizacion,
                 Titulo = a.Titulo,
             };
 
@@ -222,13 +223,73 @@ namespace RegistroActividades.ViewModels
                     Actividad.Imagen = Convert.ToBase64String(imagencodificada); // CODIFICAMOS LA FOTO
                 }
 
-                Actividad.FechaRealizacion = DateOnly.FromDateTime(Actividad.FechaRealizacion2.Value);
+                //Actividad.FechaRealizacion = DateOnly.FromDateTime(Actividad.FechaRealizacion2.Value);
 
                 await App.service.Put(Actividad);
                 ActualizarActividades();
                 Cancelar();
             }
+        }
+
+
+        [RelayCommand]
+        public void VerBorradores()
+        {
+            Borradores.Clear();
+            var actividadesBD = _actividadRepositorio.GetAll().Where(x => x.Estado == (int)Estados.Borrador);
+
+            foreach (var a in actividadesBD)
+            {
+                Borradores.Add(a);
+            }
+
+            VistaActividad = VistaActividades.Borradores;
+        }
+
+
+
+        [RelayCommand]
+        public void Borrador(Actividades a)
+        {
+            Actividad = new ActividadDTO()
+            {
+                Id = a.Id,
+                Departamento = a.NombreDepartamento,
+                Descripcion = a.Descripcion,
+                FechaActualizacion = a.FechaActualizacion,
+                Estado = a.Estado,
+                DepartamentoId = a.IdDepartamento,
+                FechaCreacion = a.FechaCreacion,
+                Imagen = a.Imagen,
+                FechaRealizacion = a.FechaRealizacion,
+                Titulo = a.Titulo,
+            };
+
+            VistaActividad = VistaActividades.Agregar;
 
         }
+
+
+        [RelayCommand]
+        public async Task GuardarBorrador()
+        {
+            Actividad.Estado = (int)Estados.Borrador;
+
+            if (!string.IsNullOrWhiteSpace(Actividad.ImagenDecodificada))
+            {
+                var imagencodificada = System.IO.File.ReadAllBytes(Actividad.ImagenDecodificada ?? "");
+                Actividad.Imagen = Convert.ToBase64String(imagencodificada); // CODIFICAMOS LA FOTO
+            }
+            else
+                Actividad.Imagen = "";
+
+            //Actividad.FechaRealizacion = DateOnly.FromDateTime(Actividad.FechaRealizacion2.Value);
+
+            await App.service.PostBorrador(Actividad);
+            ActualizarActividades();
+            Cancelar();
+        }
+
+
     }
 }
