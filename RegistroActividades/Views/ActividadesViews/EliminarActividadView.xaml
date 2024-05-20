@@ -6,7 +6,13 @@
              xmlns:local="clr-namespace:RegistroActividades.Views.ActividadesViews"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <StackPanel>
+        <TextBlock Text="{Binding Actividad.Titulo}"
+                   FontSize="30"/>
+        <Button Command="{Binding EliminarActividadCommand}"
+                Content="Eliminar">
             
-    </Grid>
+        </Button>
+        <Button Command="{Binding CancelarCommand}" />
+    </StackPanel>
 </UserControl>

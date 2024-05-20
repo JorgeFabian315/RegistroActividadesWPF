@@ -1,18 +1,23 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.VisualBasic;
 using RegistroActividades.Repositories;
 using RegistroActividades.Servicies;
 using RegistroActividades.Views;
+using RegistroDeActividades.Enums;
 using RegistroDeActividades.Models.DTOS;
 using RegistroDeActividades.Models.Entities;
 using RegistroDeActividades.Models.Validator;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.DirectoryServices.ActiveDirectory;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RegistroActividades.ViewModels
 {
@@ -20,6 +25,8 @@ namespace RegistroActividades.ViewModels
     {
 
         public ObservableCollection<Actividades> Actividades { get; set; } = new();
+        public ObservableCollection<Actividades> MisActividades { get; set; } = new();
+
         [ObservableProperty]
         private VistaInicio vistaInicio;
 
@@ -47,7 +54,6 @@ namespace RegistroActividades.ViewModels
             Actividad = new ActividadDTO();
             Error = "";
             IdUsuario = App.IdUsuario;
-            MainViewModel.VerPerfilView += App_VerPerfilView;
             MainViewModel.VerListadpActividades += MainViewModel_VerListadpActividades;
             ActualizarActividades();
             App.service.DatosActualizados += Service_DatosActualizados;
@@ -65,9 +71,12 @@ namespace RegistroActividades.ViewModels
 
         }
 
-        private void App_VerPerfilView()
+        [RelayCommand]
+        private void VerPerfil()
         {
-            VistaActividad = VistaActividades.VerMisActividades;
+                IdUsuario = App.IdUsuario;
+                VerMisActividades();
+                VistaActividad = VistaActividades.VerMisActividades;
         }
 
         [RelayCommand]
@@ -119,6 +128,75 @@ namespace RegistroActividades.ViewModels
             }
         }
 
+        public void VerMisActividades()
+        {
+            MisActividades.Clear();
+            var actividadesBD = _actividadRepositorio
+                .GetAll()
+                .Where(x => x.IdDepartamento == App.IdUsuario && x.Estado != (int)Estados.Eliminada)
+                .OrderBy(x => x.FechaActualizacion)
+                .ToList();
+
+            foreach (var a in actividadesBD)
+            {
+                MisActividades.Add(a);
+            }
+        }
+
+
+        [RelayCommand]
+        public void VerEliminar(Actividades a)
+        {
+            Actividad = new ActividadDTO()
+            {
+                Id = a.Id,
+                Departamento = a.NombreDepartamento,
+                Descripcion = a.Descripcion,
+                FechaActualizacion = a.FechaActualizacion,
+                Estado = a.Estado,
+                DepartamentoId = a.IdDepartamento,
+                FechaCreacion = a.FechaCreacion,
+                Imagen = a.Imagen,
+                FechaRealizacion2 = a.FechaRealizacion,
+                Titulo = a.Titulo,
+            };
+
+
+            VistaActividad = VistaActividades.EliminarActividad;
+        }
+
+
+        [RelayCommand]
+        public async Task EliminarActividad()
+        {
+            if (Actividad != null)
+            {
+                await App.service.Delete(Actividad.Id ?? 0);
+                ActualizarActividades();
+                Cancelar();
+            }
+        }
+
+        [RelayCommand]
+        public void VerEditar(Actividades a)
+        {
+            Actividad = new ActividadDTO()
+            {
+                Id = a.Id,
+                Departamento = a.NombreDepartamento,
+                Descripcion = a.Descripcion,
+                FechaActualizacion = a.FechaActualizacion,
+                Estado = a.Estado,
+                DepartamentoId = a.IdDepartamento,
+                FechaCreacion = a.FechaCreacion,
+                Imagen = a.Imagen,
+                FechaRealizacion2 =a.FechaRealizacion,
+                Titulo = a.Titulo,
+            };
+
+            VistaActividad = VistaActividades.EditarActividad;
+
+        }
 
 
     }

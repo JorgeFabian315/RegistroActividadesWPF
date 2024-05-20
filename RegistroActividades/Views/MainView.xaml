@@ -11,9 +11,9 @@
         Title="MainView"
         WindowStartupLocation="CenterScreen"
         Height="800"
-        MinHeight="800"
+        MinHeight="850"
         MinWidth="1200"
-        Width="800">
+        Width="850">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
@@ -130,7 +130,7 @@
                                            HorizontalAlignment="Right"
                                            TextTrimming="CharacterEllipsis"
                                            Style="{StaticResource FontFamily}" />
-                                <TextBlock Text="Ver Perfil"
+                                <!--<TextBlock Text="Ver Perfil"
                                            HorizontalAlignment="Right"
                                            FontSize="12"
                                            Cursor="Hand"
@@ -139,7 +139,7 @@
                                         <MouseBinding Gesture="LeftClick"
                                                       Command="{Binding VerMisActividadesCommand}"/>
                                     </TextBlock.InputBindings>
-                                </TextBlock>
+                                </TextBlock>-->
                             </StackPanel>
                             <Border CornerRadius="50"
                                     Padding="10"
@@ -224,8 +224,49 @@
                     </RadioButton.ToolTip>
                     <materialDesign:PackIcon Kind="Home" />
                 </RadioButton>
-                <RadioButton Style="{StaticResource botonesMenu}"
-                             Command="{Binding CambiarDepartamentoViewModelCommand}">
+                <RadioButton Command="{Binding CambiarDepartamentoViewModelCommand}">
+                    <RadioButton.Resources>
+                        <Style TargetType="RadioButton">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                            <Setter Property="Margin"
+                                    Value="10,10,20,0" />
+                            <Setter Property="Visibility"
+                                    Value="Visible" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <Border CornerRadius="10"
+                                                Padding="10"
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Left" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked"
+                                                     Value="True">
+                                                <Setter Property="Background"
+                                                        Value="#fff" />
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Background"
+                                                        Value="#fff" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Usuario.Rol}"
+                                             Value="User">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                            
+                        </Style>
+                    </RadioButton.Resources>
                     <RadioButton.ToolTip>
                         <ToolTip Margin="10,0,0,0">
                             <TextBlock Text="Departamentos"

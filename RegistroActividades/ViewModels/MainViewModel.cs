@@ -36,6 +36,7 @@ namespace RegistroActividades.ViewModels
 
         public static event Action? VerPerfilView;
         public static event Action? VerListadpActividades;
+        public static event Action? VerListadDepartamentos;
 
         [ObservableProperty]
         private Usuario? usuario;
@@ -118,6 +119,7 @@ namespace RegistroActividades.ViewModels
         public void CambiarDepartamentoViewModel()
         {
             CurrentViewModel = departamentosViewModel;
+            VerListadDepartamentos?.Invoke();
         }
 
         [RelayCommand]

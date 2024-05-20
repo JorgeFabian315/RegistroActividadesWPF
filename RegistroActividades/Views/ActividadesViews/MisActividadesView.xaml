@@ -1,12 +1,46 @@
 ﻿<UserControl x:Class="RegistroActividades.Views.ActividadesViews.MisActividadesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:RegistroActividades.Views.ActividadesViews"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:actividades="clr-namespace:RegistroActividades.Views.Actividades"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Mis actividades" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*" />
+            <RowDefinition Height=".9*" />
+        </Grid.RowDefinitions>
+        <Button
+            Command="{Binding CancelarCommand}"
+            Content="regresar"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Margin="10">
+            
+        </Button>
+            <TextBlock Text="Mis Actividades"
+                       Style="{StaticResource FontFamily}"
+                       FontSize="30"
+                       HorizontalAlignment="Center"
+                       Margin="0,20,0,10" />
+            <ScrollViewer Margin="10,10,10,20"
+                          Grid.Row="1"
+                          HorizontalContentAlignment="Center">
+                <ItemsControl ItemsSource="{Binding MisActividades}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="models:Actividades">
+                        <local:PlantillaVerMisActividadesView Margin="20,20,10,0" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
     </Grid>
 </UserControl>
