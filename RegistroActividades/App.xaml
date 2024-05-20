@@ -68,6 +68,38 @@
                 <Setter Property="TextTrimming"
                         Value="CharacterEllipsis" />
             </Style>
+            <Style TargetType="Button"
+                   BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}"
+                   x:Key="BotonAgregar">
+                <Setter Property="Margin"
+                        Value="0,10,10,10" />
+                <Setter Property="Height"
+                        Value="40" />
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="Width"
+                        Value="150" />
+                <Setter Property="Background"
+                        Value="{StaticResource Primario}" />
+                <Setter Property="Foreground"
+                        Value="#fff" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="FontFamily"
+                        Value="/Assets/Fonts/#Montserrat" />
+            </Style>
+            <Style TargetType="Button"
+                   BasedOn="{StaticResource BotonAgregar}"
+                   x:Key="BotonCancelar">
+                <Setter Property="Background"
+                        Value="{StaticResource grisClaro}" />
+                <Setter Property="BorderThickness"
+                        Value="1.5" />
+                <Setter Property="BorderBrush"
+                        Value="{StaticResource Primario}" />
+                <Setter Property="Foreground"
+                        Value="{StaticResource Primario}" />
+            </Style>
             <Style TargetType="RadioButton"
                    x:Key="botonesMenu">
                 <Setter Property="Background"

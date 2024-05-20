@@ -50,7 +50,7 @@ namespace RegistroActividades.Servicies
 
         }
 
-        public async Task Get() 
+        public async Task Get()
         {
             try
             {
@@ -58,14 +58,14 @@ namespace RegistroActividades.Servicies
 
                 bool aviso = false;
                 var response = await _client.GetFromJsonAsync<List<ActividadDTO>>($"actividad/{fecha:yyyy-MM-dd}/{fecha:HH}/{fecha:mm}");
-                
-                if(response != null && response.Any())
+
+                if (response != null && response.Any())
                 {
                     foreach (var actividad in response)
                     {
                         var entidad = _actividadesRepository.Get(actividad.Id ?? 0);
 
-                        if(entidad == null && entidad?.Estado != (int)Estados.Eliminada)
+                        if (entidad == null && entidad?.Estado != (int)Estados.Eliminada)
                         {
                             entidad = new Actividades()
                             {
@@ -74,7 +74,7 @@ namespace RegistroActividades.Servicies
                                 Descripcion = actividad.Descripcion,
                                 FechaActualizacion = actividad.FechaActualizacion ?? DateTime.UtcNow,
                                 FechaCreacion = actividad.FechaCreacion ?? DateTime.UtcNow,
-                                FechaRealizacion = actividad.FechaRealizacion.Value.ToDateTime(new TimeOnly(0,0)),
+                                FechaRealizacion = actividad.FechaRealizacion.Value.ToDateTime(new TimeOnly(0, 0)),
                                 IdDepartamento = actividad.DepartamentoId,
                                 Estado = actividad.Estado,
                                 NombreDepartamento = actividad.Departamento ?? string.Empty,
@@ -86,14 +86,14 @@ namespace RegistroActividades.Servicies
                         }
                         else
                         {
-                            if(entidad.Estado == (int)Estados.Eliminada)
+                            if (entidad.Estado == (int)Estados.Eliminada)
                             {
                                 _actividadesRepository.Delete(entidad);
                                 aviso = true;
                             }
                             else
                             {
-                                if(!actividad.Equals(entidad))
+                                if (!actividad.Equals(entidad))
                                 {
                                     _actividadesRepository.Update(entidad);
                                     aviso = true;
@@ -110,7 +110,7 @@ namespace RegistroActividades.Servicies
                             DatosActualizados?.Invoke();
                         });
                     }
-                    var fechaMaxima = response.Max(x => x.FechaActualizacion) ?? DateTime.MinValue;  
+                    var fechaMaxima = response.Max(x => x.FechaActualizacion) ?? DateTime.MinValue;
 
                     UserSettings.Default.UltimaFecha = fechaMaxima;
                     UserSettings.Default.Save();
@@ -138,7 +138,7 @@ namespace RegistroActividades.Servicies
             {
                 _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
                 var response = await _client.PostAsJsonAsync("actividad", actividad);
-                
+
                 response.EnsureSuccessStatusCode();
 
                 if (response.IsSuccessStatusCode)
@@ -148,7 +148,7 @@ namespace RegistroActividades.Servicies
             {
                 MessageBox.Show(ex.Message.ToString());
             }
-        }   
+        }
 
 
         public async Task Delete(int id)
@@ -169,6 +169,24 @@ namespace RegistroActividades.Servicies
             }
         }
 
+
+        public async Task Put(ActividadDTO actividad)
+        {
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+                var response = await _client.PutAsJsonAsync("actividad", actividad);
+
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                    await Get();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
 
 
     }

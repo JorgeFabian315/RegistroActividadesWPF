@@ -50,7 +50,7 @@
                                 Stretch="Fill" />
                 </Border.Background>
             </Border>
-            <TextBlock Text="{Binding Descripcion}"
+            <TextBlock Text="{Binding Estado}"
                        FontSize="15"
                        TextAlignment="Left"
                        Height="40"
@@ -73,7 +73,7 @@
                            Margin="20,5,0,0"
                            Style="{StaticResource FontFamily}" />
                 
-                <TextBlock Text="{Binding NombreDepartamento}"
+                <TextBlock Text="{Binding Id}"
                            FontSize="15"
                            TextAlignment="Center"
                            TextTrimming="CharacterEllipsis"

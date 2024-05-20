@@ -4,15 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RegistroActividades.Views.ActividadesViews"
+             xmlns:hp="clr-namespace:RegistroActividades.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <TextBlock Text="{Binding Actividad.Titulo}"
-                   FontSize="30"/>
+    <UserControl.Resources>
+        <hp:ConvertToImagen x:Key="convertidor" />
+    </UserControl.Resources>
+    
+    <StackPanel Margin="0,20,0,0">
+        <TextBlock Text="{Binding Actividad.Titulo, StringFormat='¿Desea eliminar esta actividad: {0}?'}"
+                   FontSize="40"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   Style="{StaticResource FontFamily}"
+                   Margin="0,20"/>
+        <Border CornerRadius="5"
+                Height="300"
+                Margin="0,20"
+                HorizontalAlignment="Center"
+                Width="350"
+                Grid.Row="2">
+            <Border.Background>
+                <ImageBrush ImageSource="{Binding Actividad.Imagen, Converter={StaticResource convertidor}}"
+                            Stretch="Fill" />
+            </Border.Background>
+        </Border>
+        <WrapPanel HorizontalAlignment="Center">
         <Button Command="{Binding EliminarActividadCommand}"
+                Style="{StaticResource BotonAgregar}"
                 Content="Eliminar">
-            
         </Button>
-        <Button Command="{Binding CancelarCommand}" />
+        <Button Command="{Binding CancelarCommand}"
+                Style="{StaticResource BotonCancelar}"
+                Content="Cancelar"/>
+        </WrapPanel>
     </StackPanel>
 </UserControl>

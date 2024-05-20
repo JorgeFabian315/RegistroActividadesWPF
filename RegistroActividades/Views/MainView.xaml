@@ -121,7 +121,7 @@
                                 <ColumnDefinition Width=".9*" />
                                 <ColumnDefinition Width=".1*" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Margin="0,0,8,0">
+                            <StackPanel Margin="0,0,8,0" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Usuario.UserName}"
                                            Margin="10,0,0,0"
                                            VerticalAlignment="Center"
@@ -274,6 +274,16 @@
                         </ToolTip>
                     </RadioButton.ToolTip>
                     <materialDesign:PackIcon Kind="Domain" />
+                </RadioButton>
+                <RadioButton Style="{StaticResource botonesMenu}"
+                             Command="{Binding CerrarSesionCommand}">
+                    <RadioButton.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="Inicio"
+                                       Foreground="#fff" />
+                        </ToolTip>
+                    </RadioButton.ToolTip>
+                    <materialDesign:PackIcon Kind="Logout" />
                 </RadioButton>
             </StackPanel>
         </Border>

@@ -55,7 +55,7 @@ namespace RegistroActividades.ViewModels
             Error = "";
             IdUsuario = App.IdUsuario;
             MainViewModel.VerListadpActividades += MainViewModel_VerListadpActividades;
-            ActualizarActividades();
+            //ActualizarActividades();
             App.service.DatosActualizados += Service_DatosActualizados;
 
         }
@@ -72,11 +72,11 @@ namespace RegistroActividades.ViewModels
         }
 
         [RelayCommand]
-        private void VerPerfil()
+        private async Task VerPerfil()
         {
-                IdUsuario = App.IdUsuario;
-                VerMisActividades();
-                VistaActividad = VistaActividades.VerMisActividades;
+            IdUsuario = App.IdUsuario;
+            VerMisActividades();
+            VistaActividad = VistaActividades.VerMisActividades;
         }
 
         [RelayCommand]
@@ -107,8 +107,11 @@ namespace RegistroActividades.ViewModels
             {
                 Actividad.Estado = 1;
 
-                var imagencodificada = System.IO.File.ReadAllBytes(Actividad.Imagen ?? "");
-                Actividad.Imagen = Convert.ToBase64String(imagencodificada); // CODIFICAMOS LA FOTO
+                if (!string.IsNullOrWhiteSpace(Actividad.ImagenDecodificada))
+                {
+                    var imagencodificada = System.IO.File.ReadAllBytes(Actividad.ImagenDecodificada ?? "");
+                    Actividad.Imagen = Convert.ToBase64String(imagencodificada); // CODIFICAMOS LA FOTO
+                }
 
                 Actividad.FechaRealizacion = DateOnly.FromDateTime(Actividad.FechaRealizacion2.Value);
 
@@ -120,7 +123,8 @@ namespace RegistroActividades.ViewModels
         public void ActualizarActividades()
         {
             Actividades.Clear();
-            var actividadesBD = _actividadRepositorio.GetAll().OrderBy(x => x.FechaActualizacion);
+
+            var actividadesBD = _actividadRepositorio.GetAll();
 
             foreach (var a in actividadesBD)
             {
@@ -131,11 +135,7 @@ namespace RegistroActividades.ViewModels
         public void VerMisActividades()
         {
             MisActividades.Clear();
-            var actividadesBD = _actividadRepositorio
-                .GetAll()
-                .Where(x => x.IdDepartamento == App.IdUsuario && x.Estado != (int)Estados.Eliminada)
-                .OrderBy(x => x.FechaActualizacion)
-                .ToList();
+            var actividadesBD = _actividadRepositorio.GetAll();
 
             foreach (var a in actividadesBD)
             {
@@ -190,7 +190,7 @@ namespace RegistroActividades.ViewModels
                 DepartamentoId = a.IdDepartamento,
                 FechaCreacion = a.FechaCreacion,
                 Imagen = a.Imagen,
-                FechaRealizacion2 =a.FechaRealizacion,
+                FechaRealizacion2 = a.FechaRealizacion,
                 Titulo = a.Titulo,
             };
 
@@ -199,5 +199,33 @@ namespace RegistroActividades.ViewModels
         }
 
 
+        [RelayCommand]
+        public async Task EditarActividad()
+        {
+            ActividadDTOValidator validator = new(_departamentosRepositorio.GetAll());
+            var results = validator.Validate(Actividad);
+
+            if (!results.IsValid)
+            {
+                Error = results.Errors.Select(x => x.ErrorMessage).Aggregate((a, b) => a + Environment.NewLine + b);
+            }
+            else
+            {
+                Actividad.Estado = 1;
+
+                if (!string.IsNullOrWhiteSpace(Actividad.ImagenDecodificada))
+                {
+                    var imagencodificada = System.IO.File.ReadAllBytes(Actividad.ImagenDecodificada ?? "");
+                    Actividad.Imagen = Convert.ToBase64String(imagencodificada); // CODIFICAMOS LA FOTO
+                }
+
+                Actividad.FechaRealizacion = DateOnly.FromDateTime(Actividad.FechaRealizacion2.Value);
+
+                await App.service.Put(Actividad);
+                ActualizarActividades();
+                Cancelar();
+            }
+
+        }
     }
 }

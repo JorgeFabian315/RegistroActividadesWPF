@@ -14,11 +14,23 @@
     <UserControl.Resources></UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".2*" />
-            <RowDefinition Height=".8*" />
+            <RowDefinition Height=".1*" />
+            <RowDefinition Height=".9*" />
         </Grid.RowDefinitions>
         <Button Command="{Binding VerPerfilCommand}"
-                Content="Ver perfil" />
+                Height="50"
+                Width="50"
+                Padding="0"
+                Background="{StaticResource Primario}"
+                HorizontalAlignment="Right"
+                Margin="0,0,10,0">
+            <materialDesign:PackIcon Kind="User"
+                                     Width="35"
+                                     Height="35"
+                                     Foreground="{StaticResource grisClaro}"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"/>
+        </Button>
         <!--#REGION FILA 2 COLUMNA 1-->
         <ScrollViewer Margin="10,10,10,20"
                       Grid.Row="1"

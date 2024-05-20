@@ -1,6 +1,7 @@
 ﻿using RegistroDeActividades.Models.Entities;
 using SQLite;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace RegistroActividades.Repositories
 {
@@ -19,35 +20,30 @@ namespace RegistroActividades.Repositories
 
         public void Insert(Actividades actividad)
         {
-            context.Insert(actividad);
+             context.Insert(actividad);
         }
 
         public void Update(Actividades actividad)
         {
-            context.Update(actividad);
+             context.Update(actividad);
         }
-        public void InsertOrReplace(Actividades actividad)
-        {
-            context.InsertOrReplace(actividad);
-        }
-        public void Delete(Actividades actividad)
+        public void  Delete(Actividades actividad)
         {
             context.Delete(actividad);
         }
 
-        public IEnumerable<Actividades> GetAll()
+        public  List<Actividades> GetAll()
         {
-            return context.Table<Actividades>().OrderBy(x => x.Titulo);
+            return  context.Table<Actividades>().OrderBy(x => x.Titulo).ThenBy(x => x.FechaActualizacion).ToList();
         }
         public Actividades Get(int id)
         {
-            return context.Find<Actividades>(id);
+            return  context.Find<Actividades>(id);
         }
-
 
         public void DeleteAll()
         {
-            context.DeleteAll<Actividades>();
+           context.DeleteAll<Actividades>();
         }
 
 

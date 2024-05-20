@@ -27,8 +27,9 @@ namespace RegistroActividades.ViewModels
         private object? currentViewModel;
 
         [ObservableProperty]
-        private bool usuarioConectado = false;  
+        private bool usuarioConectado = false;
 
+        public static event Action? LlamarSincronizador;
 
         private ActividadesViewModel actividadesViewModel = new();
 
@@ -88,20 +89,19 @@ namespace RegistroActividades.ViewModels
                             UserName = usernameClaim,
                             Rol = roleClaim
                         };
-                        
+
                         App.IdUsuario = Usuario.Id;
 
                         _repository.DeleteAll();
 
                         UsuarioConectado = true;
-                        Thread hilo = new Thread(Sincronizador) { IsBackground = true};
-                        hilo.Start();
+                        LlamarSincronizador?.Invoke();
                         CurrentViewModel = actividadesViewModel;
                     }
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LoginError = "Usuario no encontrado.";
             }
@@ -131,16 +131,20 @@ namespace RegistroActividades.ViewModels
 
 
 
-
-
-
-        async void Sincronizador()
+        [RelayCommand]
+        public async Task CerrarSesion()
         {
-            while (true)
-            {
-                await App.service.Get(); // _= Descartar la tarea 
-                Thread.Sleep(TimeSpan.FromSeconds(30));
-            }
+            UsuarioConectado = false;
+            CurrentViewModel = null;
+            Username = "";
+            Password = "";
+            LoginError = "";
+            UserSettings.Default.Token = "";
+            UserSettings.Default.Save();
+             _repository.DeleteAll();
+
+            OnPropertyChanged();
+
         }
 
 
