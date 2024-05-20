@@ -170,24 +170,6 @@ namespace RegistroActividades.Servicies
         }
 
 
-        public async Task Put(ActividadDTO actividad)
-        {
-            try
-            {
-                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
-                var response = await _client.PutAsJsonAsync("actividad", actividad);
-
-                response.EnsureSuccessStatusCode();
-
-                if (response.IsSuccessStatusCode)
-                    await Get();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
-        }
-
 
     }
 }

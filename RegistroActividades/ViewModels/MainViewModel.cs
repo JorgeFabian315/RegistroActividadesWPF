@@ -50,7 +50,7 @@ namespace RegistroActividades.ViewModels
             UsuarioConectado = false;
             UserSettings.Default.UltimaFecha = DateTime.MinValue;
             UserSettings.Default.Save();
-           _repository.DeleteAll();
+
         }
 
         [RelayCommand]

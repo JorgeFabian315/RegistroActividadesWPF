@@ -22,6 +22,5 @@
         public int DepartamentoId { get; set; }
 
         public string? Imagen { get; set; }
-        public string? ImagenDecodificada { get; set; }
     }
 }

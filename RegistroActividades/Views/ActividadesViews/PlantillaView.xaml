@@ -50,7 +50,7 @@
                                 Stretch="Fill" />
                 </Border.Background>
             </Border>
-            <TextBlock Text="{Binding Estado}"
+            <TextBlock Text="{Binding Descripcion}"
                        FontSize="15"
                        TextAlignment="Left"
                        Height="40"
