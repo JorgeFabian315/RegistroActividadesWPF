@@ -2,6 +2,7 @@
 using RegistroDeActividades.Models.DTOS;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Windows;
 
 namespace RegistroActividades.Servicies
 {
@@ -23,35 +24,53 @@ namespace RegistroActividades.Servicies
             };
         }
 
-        public async Task<List<DepartamentoDTO>> Get()
+        public async Task<List<DepartamentoDTO>>? Get()
         {
-            var response = await _client.GetAsync("departamento");
-
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var departamentos = await response.Content.ReadFromJsonAsync<List<DepartamentoDTO>>();
+                var response = await _client.GetAsync("departamento");
 
-                return departamentos;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var departamentos = await response.Content.ReadFromJsonAsync<List<DepartamentoDTO>>();
+
+                    return departamentos;
+                }
+                else
+                    return null;
             }
-            else
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
                 return null;
+                
+            }
 
         }
 
-        public async Task<DepartamentoDTO> Get(int id)
+        public async Task<DepartamentoDTO>? Get(int id)
         {
-            var response = await _client.GetAsync($"departamento/{id}");
-
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var departamento = await response.Content.ReadFromJsonAsync<DepartamentoDTO>();
+                var response = await _client.GetAsync($"departamento/{id}");
 
-                return departamento;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var departamento = await response.Content.ReadFromJsonAsync<DepartamentoDTO>();
+
+                    return departamento;
+                }
+                else
+                    return null;
             }
-            else
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
                 return null;
+
+            }
 
         }
 
