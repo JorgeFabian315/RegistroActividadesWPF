@@ -10,8 +10,8 @@
         mc:Ignorable="d"
         Title="MainView"
         WindowStartupLocation="CenterScreen"
-        Height="800"
-        MinHeight="650"
+        Height="600"
+        MinHeight="450"
         MinWidth="1000"
         Width="850">
     <Window.DataContext>

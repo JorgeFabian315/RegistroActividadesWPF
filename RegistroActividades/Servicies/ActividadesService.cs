@@ -2,11 +2,8 @@
 using RegistroDeActividades.Enums;
 using RegistroDeActividades.Models.DTOS;
 using RegistroDeActividades.Models.Entities;
-using System.Configuration;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Text.Json;
 using System.Windows;
 
 namespace RegistroActividades.Servicies
@@ -15,7 +12,7 @@ namespace RegistroActividades.Servicies
     {
 
         private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
-        //private readonly string url = "https://localhost:7051/api/";
+
         private readonly HttpClient _client;
         private string? _token;
         private ActividadesRepository _actividadesRepository = new();
@@ -62,6 +59,8 @@ namespace RegistroActividades.Servicies
         {
             try
             {
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+
                 var fecha = UserSettings.Default.UltimaFecha;
 
                 bool aviso = false;
@@ -72,8 +71,8 @@ namespace RegistroActividades.Servicies
                     foreach (var actividad in response)
                     {
 
+                        var total = _actividadesRepository.GetAll().ToList();
                           var  entidad = _actividadesRepository.Get(actividad.Id ?? 0);
-                        
                         
                         if (entidad == null && actividad?.Estado != (int)Estados.Eliminada)
                         {

@@ -130,6 +130,9 @@ namespace RegistroActividades.ViewModels
                 .Where(x => x.Estado == (int)Estados.Activa)
                 .OrderBy(x => x.FechaActualizacion);
 
+
+            var actividades = _actividadRepositorio.GetAll().ToList();
+
             foreach (var a in actividadesBD)
             {
                 Actividades.Add(a);
