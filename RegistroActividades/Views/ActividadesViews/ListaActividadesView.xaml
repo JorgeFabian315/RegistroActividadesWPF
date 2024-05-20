@@ -16,20 +16,33 @@
             <RowDefinition Height=".1*" />
             <RowDefinition Height=".9*" />
         </Grid.RowDefinitions>
-        <Button Command="{Binding VerPerfilCommand}"
-                Height="50"
-                Width="50"
-                Padding="0"
-                Background="{StaticResource Primario}"
-                HorizontalAlignment="Right"
-                Margin="0,0,10,0">
-            <materialDesign:PackIcon Kind="User"
-                                     Width="35"
-                                     Height="35"
-                                     Foreground="{StaticResource grisClaro}"
-                                     VerticalAlignment="Center"
-                                     HorizontalAlignment="Center"/>
-        </Button>
+        <WrapPanel HorizontalAlignment="Right"
+                   Margin="0,0,30,0"
+                   VerticalAlignment="Center">
+            <TextBlock Text="Filtrar por departamento: "
+                       VerticalAlignment="Center"
+                       FontSize="15"
+                       Style="{StaticResource FontFamily}"
+                       Margin="0,0,20,0"/>
+            <ComboBox Width="300"
+                      SelectionChanged="ComboBox_SelectionChanged"
+                      ItemsSource="{Binding DepartamentosSubordinados}"
+                      Margin="0,0,20,0" />
+            <Button Command="{Binding VerPerfilCommand}"
+                    Height="50"
+                    Width="50"
+                    Padding="0"
+                    Background="{StaticResource Primario}"
+                    HorizontalAlignment="Right"
+                    >
+                <materialDesign:PackIcon Kind="User"
+                                         Width="35"
+                                         Height="35"
+                                         Foreground="{StaticResource grisClaro}"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center" />
+            </Button>
+        </WrapPanel>
         <!--#REGION FILA 2 COLUMNA 1-->
         <ScrollViewer Margin="10,10,10,20"
                       Grid.Row="1"

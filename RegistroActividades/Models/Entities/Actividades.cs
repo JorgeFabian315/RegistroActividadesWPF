@@ -30,3 +30,11 @@ public partial class Actividades
     public string? Imagen { get; set; }
 
 }
+
+
+public class ActividadesDepartamento
+{
+    public string Key { get; set; }
+    
+    public List<Actividades> Value { get; set; }
+}
