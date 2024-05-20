@@ -8,8 +8,8 @@ namespace RegistroActividades.Servicies
     public class DepartamentosService
     {
 
-        //private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
-        private readonly string url = "https://localhost:7051/api/";
+        private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
+        //private readonly string url = "https://localhost:7051/api/";
 
         private readonly HttpClient _client;
 
