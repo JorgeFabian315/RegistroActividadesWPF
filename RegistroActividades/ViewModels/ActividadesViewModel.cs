@@ -107,7 +107,7 @@ namespace RegistroActividades.ViewModels
             {
                 Actividad.Estado = 1;
 
-                var imagencodificada = System.IO.File.ReadAllBytes(Actividad.Imagen ?? "");
+                var imagencodificada = System.IO.File.ReadAllBytes(Actividad.ImagenDecodificada ?? "");
                 Actividad.Imagen = Convert.ToBase64String(imagencodificada); // CODIFICAMOS LA FOTO
 
                 Actividad.FechaRealizacion = DateOnly.FromDateTime(Actividad.FechaRealizacion2.Value);
@@ -120,7 +120,9 @@ namespace RegistroActividades.ViewModels
         public void ActualizarActividades()
         {
             Actividades.Clear();
-            var actividadesBD = _actividadRepositorio.GetAll().OrderBy(x => x.FechaActualizacion);
+            var actividadesBD = _actividadRepositorio.GetAll()
+                .Where(x => x.Estado == (int)Estados.Activa)
+                .OrderBy(x => x.FechaActualizacion);
 
             foreach (var a in actividadesBD)
             {
@@ -172,6 +174,21 @@ namespace RegistroActividades.ViewModels
             if (Actividad != null)
             {
                 await App.service.Delete(Actividad.Id ?? 0);
+
+                //var entidad = new Actividades()
+                //{
+                //    Id = Actividad.Id ?? 0,
+                //    Titulo = Actividad.Titulo,
+                //    Descripcion = Actividad.Descripcion,
+                //    FechaActualizacion = Actividad.FechaActualizacion ?? DateTime.UtcNow,
+                //    FechaCreacion = Actividad.FechaCreacion ?? DateTime.UtcNow,
+                //    FechaRealizacion = Actividad.FechaRealizacion.Value.ToDateTime(new TimeOnly(0, 0)),
+                //    IdDepartamento = Actividad.DepartamentoId,
+                //    Estado = Actividad.Estado,
+                //    NombreDepartamento = Actividad.Departamento ?? string.Empty,
+                //    Imagen = Actividad.Imagen ?? string.Empty
+                //};
+                //_actividadRepositorio.Update(entidad);
                 ActualizarActividades();
                 Cancelar();
             }
@@ -195,8 +212,35 @@ namespace RegistroActividades.ViewModels
             };
 
             VistaActividad = VistaActividades.EditarActividad;
-
         }
+
+        [RelayCommand]
+        public async Task EditarActividaad()
+        {
+            ActividadDTOValidator validator = new(_departamentosRepositorio.GetAll());
+            var results = validator.Validate(Actividad);
+
+            if (!results.IsValid)
+                Error = results.Errors.Select(x => x.ErrorMessage).Aggregate((a, b) => a + Environment.NewLine + b);
+            
+            else
+            {
+                Actividad.Estado = 1;
+
+                if (!string.IsNullOrWhiteSpace(Actividad.ImagenDecodificada))
+                {
+                    var imagencodificada = System.IO.File.ReadAllBytes(Actividad.ImagenDecodificada);
+                    Actividad.Imagen = Convert.ToBase64String(imagencodificada); // CODIFICAMOS LA FOTO
+                }
+
+                Actividad.FechaRealizacion = DateOnly.FromDateTime(Actividad.FechaRealizacion2.Value);
+
+                await App.service.Put(Actividad);
+                ActualizarActividades();
+                Cancelar();
+            }
+        }
+
 
 
     }

@@ -182,7 +182,7 @@
                            Width="300"
                            Source="/Assets/Imagenes/fondo.jpg"
                            Stretch="Fill" />
-                    <TextBox Text="{Binding Actividad.Imagen, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Text="{Binding Actividad.ImagenDecodificada, UpdateSourceTrigger=PropertyChanged}"
                              Visibility="Collapsed"
                              x:Name="txtImagen" />
                     <Button VerticalAlignment="Top"
