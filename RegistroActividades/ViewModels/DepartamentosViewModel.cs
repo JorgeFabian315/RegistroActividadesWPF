@@ -11,8 +11,6 @@ namespace RegistroActividades.ViewModels
 
         DepartamentosService departamentosService = new DepartamentosService();
 
-
-
         [ObservableProperty]
         private DepartamentoCreateDTO departamento = new();
 
@@ -54,9 +52,5 @@ namespace RegistroActividades.ViewModels
             GetDepartamentos();
             VistaDepartamento = VistaDepartamentos.Listado;
         }
-
-
-
-
     }
 }
