@@ -52,7 +52,13 @@ namespace RegistroActividades.ViewModels
             UsuarioConectado = false;
             UserSettings.Default.UltimaFecha = DateTime.MinValue;
             UserSettings.Default.Save();
+            ActividadesService.DeslogearEvent += ActividadesService_DeslogearEvent;
 
+        }
+
+        private void ActividadesService_DeslogearEvent()
+        {
+            CerrarSesion();
         }
 
         [RelayCommand]
@@ -167,7 +173,7 @@ namespace RegistroActividades.ViewModels
             while (DetenerHilo == false)
             {
                 await App.service.Get(); // _= Descartar la tarea 
-                Thread.Sleep(TimeSpan.FromMinutes(2));
+                Thread.Sleep(TimeSpan.FromMinutes(1));
             }
         }
 
