@@ -18,7 +18,7 @@
             BorderBrush="{StaticResource Primario}"
             BorderThickness="2"
             Padding="10"
-            Height="600"
+            Height="520"
             CornerRadius="10">
         <Grid Background="Transparent">
             <Grid.Resources>
