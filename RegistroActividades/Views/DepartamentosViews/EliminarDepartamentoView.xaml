@@ -16,10 +16,10 @@
         </TextBlock>
 
         <WrapPanel Margin="10" HorizontalAlignment="Right">
-            <Button Background="red" Foreground="#fff" Margin="0,0,10,0" Command="{Binding EliminarDepartamentoCommand}">
+            <Button Background="#b91c1c" Foreground="#fff" Margin="0,0,10,0" Command="{Binding EliminarDepartamentoCommand}">
                 Eliminar
             </Button>
-            <Button Background="Blue" Foreground="#fff" Command="{Binding CancelarCommand}">
+            <Button Background="{StaticResource Fuerte}" Foreground="#fff" Command="{Binding CancelarCommand}">
                 Cancelar
             </Button>
            

@@ -14,6 +14,7 @@
 
             <Grid.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                   
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IdSuperior}" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Hidden"></Setter>
@@ -32,25 +33,28 @@
                         Grid.ColumnSpan="6"
                        Text="{Binding Nombre}" />
             <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Column="2">
-                <Button Margin="0,0,20,0" Command="{Binding ElementName=userControl, Path=DataContext.VerEliminarDepartamentoCommand}" CommandParameter="{Binding .}">
+
+
+                <Button Margin="0,0,20,0" Background="#fff" Command="{Binding ElementName=userControl, Path=DataContext.VerEditarDepartamentoCommand}" CommandParameter="{Binding .}">
+                    <materialDesign:PackIcon VerticalAlignment="Center"
+                      Height="20"
+                      Width="20"
+                      HorizontalAlignment="Center"
+                      Foreground="{StaticResource Fuerte}"
+                      Kind="Edit" />
+                </Button>
+
+                <Button Background="#fff"  Command="{Binding ElementName=userControl, Path=DataContext.VerEliminarDepartamentoCommand}" CommandParameter="{Binding .}">
                         <materialDesign:PackIcon VerticalAlignment="Center"
                             Height="20"
                             Width="20"
                             HorizontalAlignment="Center"
-                            Foreground="#fff"
+                            Foreground="{StaticResource Fuerte}"
                             Kind="Delete"
                                  
 />
                     </Button>
 
-                <Button Command="{Binding ElementName=userControl, Path=DataContext.VerEditarDepartamentoCommand}" CommandParameter="{Binding .}">
-                    <materialDesign:PackIcon VerticalAlignment="Center"
-                      Height="20"
-                      Width="20"
-                      HorizontalAlignment="Center"
-                      Foreground="#fff"
-                      Kind="Edit" />
-                </Button>
             </StackPanel>
         </Grid>
 

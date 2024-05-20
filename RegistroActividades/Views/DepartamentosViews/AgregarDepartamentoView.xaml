@@ -37,14 +37,14 @@
                  Command="{Binding GuardarDepartamentoCommand}"
                  Foreground="#fff"
                  Margin="0,20,20,0"
-                  Background="blue"
+                  Background="{StaticResource Fuerte}"
                 />
             <Button
                  Content="Cancelar" 
                  Command="{Binding CancelarCommand}"
                  Foreground="#fff"
                  Margin="0,20,0,0"
-                    Background="red"
+                 Background="#b91c1c"
             />
         </StackPanel>
     </StackPanel>
