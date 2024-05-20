@@ -31,9 +31,9 @@ namespace RegistroActividades.ViewModels
 
         public static event Action? LlamarSincronizador;
 
-        private ActividadesViewModel actividadesViewModel = new();
+        private ActividadesViewModel actividadesViewModel;
 
-        private DepartamentosViewModel departamentosViewModel = new();
+        private DepartamentosViewModel departamentosViewModel;
 
         public static event Action? VerPerfilView;
         public static event Action? VerListadpActividades;
@@ -96,6 +96,7 @@ namespace RegistroActividades.ViewModels
                         var actividades = _repository.GetAll().ToList();
                         UsuarioConectado = true;
                         LlamarSincronizador?.Invoke();
+                        actividadesViewModel = new();
                         CurrentViewModel = actividadesViewModel;
                     }
 
@@ -118,7 +119,7 @@ namespace RegistroActividades.ViewModels
         [RelayCommand]
         public void CambiarDepartamentoViewModel()
         {
-            CurrentViewModel = departamentosViewModel;
+            CurrentViewModel = departamentosViewModel = new();
             VerListadDepartamentos?.Invoke();
         }
 
