@@ -91,6 +91,8 @@ namespace RegistroActividades.ViewModels
                             Rol = roleClaim
                         };
 
+                        
+
                         App.IdUsuario = Usuario.Id;
 
                         UsuarioConectado = true;
@@ -100,6 +102,8 @@ namespace RegistroActividades.ViewModels
 
                         Thread hilo = new Thread(Sincronizador) { IsBackground = true };
                         hilo.Start();
+
+                        actividadesViewModel = new ActividadesViewModel();
                         
                         CurrentViewModel = actividadesViewModel;
                     }
@@ -123,7 +127,8 @@ namespace RegistroActividades.ViewModels
         [RelayCommand]
         public void CambiarDepartamentoViewModel()
         {
-            CurrentViewModel = departamentosViewModel = new();
+            departamentosViewModel = new DepartamentosViewModel();
+            CurrentViewModel = departamentosViewModel;
             VerListadDepartamentos?.Invoke();
         }
 
