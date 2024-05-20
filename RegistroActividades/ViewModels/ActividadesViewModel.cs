@@ -265,7 +265,7 @@ namespace RegistroActividades.ViewModels
                 Titulo = a.Titulo,
             };
 
-            VistaActividad = VistaActividades.Agregar;
+            VistaActividad = VistaActividades.EditarBorrador;
 
         }
 
@@ -289,6 +289,25 @@ namespace RegistroActividades.ViewModels
             ActualizarActividades();
             Cancelar();
         }
+
+        [RelayCommand]
+        public async Task EditarBorrador()
+        {
+            Actividad.Estado = (int)Estados.Borrador;
+
+            if (!string.IsNullOrWhiteSpace(Actividad.ImagenDecodificada))
+            {
+                var imagencodificada = System.IO.File.ReadAllBytes(Actividad.ImagenDecodificada ?? "");
+                Actividad.Imagen = Convert.ToBase64String(imagencodificada); // CODIFICAMOS LA FOTO
+            }
+            else
+                Actividad.Imagen = "";
+
+            await App.service.PutBorrador(Actividad);
+            VerBorradores();
+        }
+
+
 
 
     }

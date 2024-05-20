@@ -4,9 +4,177 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RegistroActividades.Views.ActividadesViews"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="650" d:DesignWidth="1200">
+    <Border Background="#fff"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="20"
+            Width="1000"
+            BorderBrush="{StaticResource Primario}"
+            BorderThickness="2"
+            Padding="10"
+            Height="600"
+            CornerRadius="10">
+        <Grid Background="Transparent">
+            <Grid.Resources>
+                <Style TargetType="TextBlock"
+                       x:Key="TituloAgregar"
+                       BasedOn="{StaticResource FontFamily}">
+                    <Setter Property="FontSize"
+                            Value="30" />
+                    <Setter Property="HorizontalAlignment"
+                            Value="Center" />
+                    <Setter Property="Margin"
+                            Value="0,10,0,10" />
+                </Style>
+                <Style TargetType="TextBlock"
+                       x:Key="TitulosCampo"
+                       BasedOn="{StaticResource FontFamily}">
+                    <Setter Property="FontSize"
+                            Value="20" />
+                    <Setter Property="Margin"
+                            Value="0,10,0,0" />
+                    <Setter Property="HorizontalAlignment"
+                            Value="Left" />
+                </Style>
+                <Style TargetType="TextBox"
+                       BasedOn="{StaticResource MaterialDesignOutlinedTextBox}"
+                       x:Key="TextBoxAgregar">
+                    <Setter Property="FontSize"
+                            Value="20" />
+                    <Setter Property="Width"
+                            Value="500" />
+                    <Setter Property="Padding"
+                            Value="10" />
+                    <Setter Property="TextWrapping"
+                            Value="Wrap" />
+                    <Setter Property="Height"
+                            Value="50" />
+                    <Setter Property="Margin"
+                            Value="0,10,0,0" />
+                    <Setter Property="HorizontalAlignment"
+                            Value="Left" />
+                    <Setter Property="FontFamily"
+                            Value="/Assets/Fonts/#Montserrat" />
+                </Style>
+                <Style TargetType="DatePicker"
+                       BasedOn="{StaticResource MaterialDesignOutlinedDatePicker}">
+                    <Setter Property="Width"
+                            Value="500" />
+                    <Setter Property="HorizontalAlignment"
+                            Value="Left" />
+                    <Setter Property="Margin"
+                            Value="0,10,0,10" />
+                    <Setter Property="Height"
+                            Value="50" />
+                    <Setter Property="FontSize"
+                            Value="15" />
+                    <Setter Property="VerticalContentAlignment"
+                            Value="Center" />
+                    <Setter Property="FontFamily"
+                            Value="/Assets/Fonts/#Montserrat" />
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".6*" />
+                <ColumnDefinition Width=".4*" />
+            </Grid.ColumnDefinitions>
+            <Button Background="{StaticResource Morado}"
+                    VerticalAlignment="Top"
+                    Grid.Column="1"
+                    BorderThickness="0"
+                    Padding="5"
+                    Command="{Binding EditarBorradorCommand}"
+                    Height="40"
+                    Width="40"
+                    HorizontalAlignment="Right">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="Guardar borrador" />
+                    </ToolTip>
+                </Button.ToolTip>
+                <materialDesign:PackIcon Kind="ContentSave"
+                                         Width="30"
+                                         Height="30"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center"
+                                         Foreground="{StaticResource grisClaro}" />
+            </Button>
+            <StackPanel Margin="20,0,20,0">
+                <TextBlock Text="Editar borrador"
+                           Style="{StaticResource TituloAgregar}" />
+                <TextBlock Text="Título:"
+                           Style="{StaticResource TitulosCampo}" />
+                <TextBox Text="{Binding Actividad.Titulo}"
+                         Style="{StaticResource TextBoxAgregar}" />
+                <TextBlock Text="Descripción:"
+                           Style="{StaticResource TitulosCampo}" />
+                <TextBox Style="{StaticResource TextBoxAgregar}"
+                         Height="120"
+                         Text="{Binding Actividad.Descripcion}"
+                         AcceptsReturn="True" />
+                <TextBlock Text="Fecha:"
+                           Style="{StaticResource TitulosCampo}" />
+                <DatePicker SelectedDate="{Binding Actividad.FechaRealizacion}" />
+                <WrapPanel HorizontalAlignment="Center"
+                           Margin="0,10,0,0">
+                    <Button Content="Agregar"
+                            Command="{Binding AgregarActividadCommand}"
+                            Style="{StaticResource BotonAgregar}" />
+                    <Button Content="Cancelar"
+                            Command="{Binding CancelarCommand}"
+                            Style="{StaticResource BotonCancelar}" />
+                </WrapPanel>
+                <TextBlock Style="{StaticResource FontFamily}"
+                           Text="{Binding Error}"
+                           FontSize="15"
+                           HorizontalAlignment="Center"
+                           Margin="0,10,0,0"
+                           Foreground="Red" />
+            </StackPanel>
+            <StackPanel Grid.Column="1"
+                        Margin="0,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center">
+                <Grid>
+                    <Image Height="300"
+                           Width="300"
+                           Source="/Assets/Imagenes/fondo.jpg"
+                           Stretch="Fill" />
+                    <Image Height="300"
+                           Name="imgActividad"
+                           Width="300"
+                           Source="/Assets/Imagenes/fondo.jpg"
+                           Stretch="Fill" />
+                    <TextBox Text="{Binding Actividad.ImagenDecodificada, UpdateSourceTrigger=PropertyChanged}"
+                             Visibility="Collapsed"
+                             x:Name="txtImagen" />
+                    <Button VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Height="30"
+                            Width="30"
+                            Click="Button_Click"
+                            Background="#E70010"
+                            Padding="0"
+                            BorderThickness="0"
+                            Margin="5,10,10,5">
+                        <materialDesign:PackIcon Kind="Trash"
+                                                 VerticalAlignment="Center"
+                                                 Width="20"
+                                                 Foreground="{StaticResource grisClaro}"
+                                                 Height="20"
+                                                 HorizontalAlignment="Center" />
+                    </Button>
+                </Grid>
+                <Button Content="Agregar imagen"
+                        Width="200"
+                        Style="{StaticResource BotonAgregar}"
+                        Name="btnAgregarImagen"
+                        Click="btnAgregarImagen_Click" />
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>
