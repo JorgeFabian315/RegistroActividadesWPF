@@ -24,6 +24,11 @@ namespace RegistroDeActividades.Models.Validator
                 .MaximumLength(500)
                 .WithMessage("La descripción de la actividad no puede tener más de 500 caracteres");
 
+            RuleFor(x => x.ImagenDecodificada)
+                .NotEmpty() 
+                .NotNull()
+                .WithMessage("La imagen es requerida");
+
 
         }
 
