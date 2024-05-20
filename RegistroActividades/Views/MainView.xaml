@@ -9,6 +9,7 @@
         xmlns:loginviews="clr-namespace:RegistroActividades.Views.LoginViews"
         mc:Ignorable="d"
         Title="MainView"
+        WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         Height="600"
         MinHeight="450"
