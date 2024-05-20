@@ -32,9 +32,9 @@ namespace RegistroActividades.ViewModels
 
         public static event Action? LlamarSincronizador;
 
-        private ActividadesViewModel actividadesViewModel = new();
+        private ActividadesViewModel actividadesViewModel;
 
-        private DepartamentosViewModel departamentosViewModel = new();
+        private DepartamentosViewModel departamentosViewModel;
 
         public static event Action? VerPerfilView;
         public static event Action? VerListadpActividades;
@@ -91,6 +91,8 @@ namespace RegistroActividades.ViewModels
                             Rol = roleClaim
                         };
 
+                        
+
                         App.IdUsuario = Usuario.Id;
 
                         UsuarioConectado = true;
@@ -100,6 +102,8 @@ namespace RegistroActividades.ViewModels
 
                         Thread hilo = new Thread(Sincronizador) { IsBackground = true };
                         hilo.Start();
+
+                        actividadesViewModel = new ActividadesViewModel();
                         
                         CurrentViewModel = actividadesViewModel;
                     }
@@ -123,6 +127,7 @@ namespace RegistroActividades.ViewModels
         [RelayCommand]
         public void CambiarDepartamentoViewModel()
         {
+            departamentosViewModel = new DepartamentosViewModel();
             CurrentViewModel = departamentosViewModel;
             VerListadDepartamentos?.Invoke();
         }
