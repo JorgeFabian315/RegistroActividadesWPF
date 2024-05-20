@@ -12,7 +12,8 @@
         VerMisActividades,
         EliminarActividad,
         EditarActividad,
-        Borradores
+        Borradores,
+        EditarBorrador
     }
 
     public enum VistaDepartamentos

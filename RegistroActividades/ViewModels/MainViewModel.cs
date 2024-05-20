@@ -93,7 +93,7 @@ namespace RegistroActividades.ViewModels
                         App.IdUsuario = Usuario.Id;
 
                         _repository.DeleteAll();
-
+                        var actividades = _repository.GetAll().ToList();
                         UsuarioConectado = true;
                         LlamarSincronizador?.Invoke();
                         CurrentViewModel = actividadesViewModel;

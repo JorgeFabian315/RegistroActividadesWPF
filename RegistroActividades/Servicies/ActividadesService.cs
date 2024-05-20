@@ -28,25 +28,33 @@ namespace RegistroActividades.Servicies
 
         public async Task<string?> IniciarSesion(LoginDTO user)
         {
-            var response = await _client.PostAsJsonAsync("login", user);
-
-            response.EnsureSuccessStatusCode();
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var token = await response.Content.ReadAsStringAsync();
+                var response = await _client.PostAsJsonAsync("login", user);
 
-                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                response.EnsureSuccessStatusCode();
 
-                _token = token;
+                if (response.IsSuccessStatusCode)
+                {
+                    var token = await response.Content.ReadAsStringAsync();
 
-                UserSettings.Default.Token = token;
-                UserSettings.Default.Save();
+                    _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                return token;
+                    _token = token;
+
+                    UserSettings.Default.Token = token;
+                    UserSettings.Default.Save();
+
+                    return token;
+                }
+                else
+                    return null;
             }
-            else
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
                 return null;
+            }   
 
         }
 
@@ -223,6 +231,26 @@ namespace RegistroActividades.Servicies
                 MessageBox.Show(ex.Message.ToString());
             }
         }
+
+
+        public async Task PutBorrador(ActividadDTO actividad)
+        {
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+                var response = await _client.PutAsJsonAsync("actividad/borrador", actividad);
+
+                response.EnsureSuccessStatusCode();
+
+                if (response.IsSuccessStatusCode)
+                    await Get();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
 
 
     }

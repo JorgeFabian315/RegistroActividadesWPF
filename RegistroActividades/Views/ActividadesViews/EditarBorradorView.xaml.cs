@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,25 @@ namespace RegistroActividades.Views.ActividadesViews
         public EditarBorradorView()
         {
             InitializeComponent();
+        }
+        private void btnAgregarImagen_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files |*.jpg;*.jpeg;";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                txtImagen.Text = openFileDialog.FileName;
+                imgActividad.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+            }
+
+
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            imgActividad.Source = null;
         }
     }
 }
