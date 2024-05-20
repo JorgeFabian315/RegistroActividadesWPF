@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using RegistroActividades.Servicies;
 using RegistroActividades.Views;
 using RegistroDeActividades.Models.DTOS;
+using RegistroActividades.Models.DTOS;
 
 namespace RegistroActividades.ViewModels
 {

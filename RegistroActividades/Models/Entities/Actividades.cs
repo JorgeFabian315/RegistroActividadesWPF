@@ -5,7 +5,7 @@ namespace RegistroDeActividades.Models.Entities;
 [Table("Actividades")]
 public partial class Actividades
 {
-    [PrimaryKey, AutoIncrement]
+    [PrimaryKey]
     public int Id { get; set; }
 
     [NotNull]
@@ -13,7 +13,7 @@ public partial class Actividades
     [NotNull]
     public string? Descripcion { get; set; }
     [NotNull]
-    public DateTime FechaRealizacion { get; set; } 
+    public string? FechaRealizacion { get; set; } 
     public int IdDepartamento { get; set; }
 
     public DateTime FechaCreacion { get; set; }
@@ -21,6 +21,12 @@ public partial class Actividades
     public DateTime FechaActualizacion { get; set; }
 
     public int Estado { get; set; }
-    [Ignore]
-    public virtual Departamentos IdDepartamentoNavigation { get; set; } = null!;
+    [NotNull]
+    public string NombreDepartamento { get; set; } = string.Empty;
+
+    //[Ignore]
+    //public virtual Departamentos IdDepartamentoNavigation { get; set; } = null!;
+
+    public string? Imagen { get; set; }
+
 }

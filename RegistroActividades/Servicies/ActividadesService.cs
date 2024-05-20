@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Windows;
 
 namespace RegistroActividades.Servicies
@@ -13,7 +14,8 @@ namespace RegistroActividades.Servicies
     public class ActividadesService
     {
 
-        private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
+        //private readonly string url = "https://registro-actividades-equipo-dos.websitos256.com/api/";
+        private readonly string url = "https://localhost:7051/api/";
         private readonly HttpClient _client;
         private string? _token;
         private ActividadesRepository _actividadesRepository = new();
@@ -38,7 +40,7 @@ namespace RegistroActividades.Servicies
 
                 _token = token;
 
-                RegistroActividades.UserSettings.Default.Token = token;
+                UserSettings.Default.Token = token;
                 UserSettings.Default.Save();
 
                 return token;
@@ -52,11 +54,12 @@ namespace RegistroActividades.Servicies
         {
             try
             {
-                var fecha = RegistroActividades.UserSettings.Default.UltimaFecha;
+                var fecha = UserSettings.Default.UltimaFecha;
 
                 bool aviso = false;
                 var response = await _client.GetFromJsonAsync<List<ActividadDTO>>($"actividad/{fecha:yyyy-MM-dd}/{fecha:HH}/{fecha:mm}");
-                if(response != null)
+                
+                if(response != null && response.Any())
                 {
                     foreach (var actividad in response)
                     {
@@ -71,9 +74,11 @@ namespace RegistroActividades.Servicies
                                 Descripcion = actividad.Descripcion,
                                 FechaActualizacion = actividad.FechaActualizacion ?? DateTime.UtcNow,
                                 FechaCreacion = actividad.FechaCreacion ?? DateTime.UtcNow,
-                                FechaRealizacion = actividad.FechaRealizacion ?? DateTime.UtcNow,
+                                FechaRealizacion = actividad.FechaRealizacion.ToString() ?? DateTime.UtcNow.ToString(),
                                 IdDepartamento = actividad.DepartamentoId,
                                 Estado = actividad.Estado,
+                                NombreDepartamento = actividad.Departamento ?? string.Empty,
+                                Imagen = actividad.Imagen ?? string.Empty
                             };
 
                             _actividadesRepository.Insert(entidad);
@@ -100,15 +105,15 @@ namespace RegistroActividades.Servicies
                     }
                     if (aviso)
                     {
-
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             DatosActualizados?.Invoke();
                         });
                     }
-                    var fechaMaxima = response.Max(x => x.FechaActualizacion) ?? DateTime.UtcNow;  
+                    var fechaMaxima = response.Max(x => x.FechaActualizacion) ?? DateTime.MinValue;  
 
-                    RegistroActividades.UserSettings.Default.UltimaFecha = fechaMaxima;
+                    UserSettings.Default.UltimaFecha = fechaMaxima;
+                    UserSettings.Default.Save();
                 }
 
 
@@ -127,7 +132,23 @@ namespace RegistroActividades.Servicies
 
 
 
+        public async Task Post(ActividadDTO actividad)
+        {
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserSettings.Default.Token);
+                var response = await _client.PostAsJsonAsync("actividad", actividad);
+                
+                response.EnsureSuccessStatusCode();
 
+                if (response.IsSuccessStatusCode)
+                    await Get();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }   
 
 
 
